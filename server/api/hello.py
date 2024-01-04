@@ -2,6 +2,6 @@ from flask import Blueprint
 
 hello = Blueprint('hello', __name__)
 
-@app.route('/api/hello')
-def hello():
+@hello.route('/api/hello')
+def hello_world():
     return "Hello, World!"

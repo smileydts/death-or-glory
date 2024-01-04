@@ -11,7 +11,7 @@
     <div id="message"></div>
     <script>
       document.getElementById('myButton').onclick = function() {
-          fetch('/api/hello')
+          fetch('http://localhost:5000/api/hello')
               .then(response => response.text())
               .then(data => {
                   document.getElementById('message').innerText = data;
