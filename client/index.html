@@ -7,10 +7,12 @@
     <title>Simple Game</title>
   </head>
   <body>
-    <button id="myButton">Click me</button>
+    <audio id="audioPlayer" src="Intro.mp3" loop></audio>
+    <button onclick="document.getElementById('audioPlayer').play()" id="myButton">Click me</button>
     <div id="message"></div>
     <script>
       document.getElementById('myButton').onclick = function() {
+          document.getElementById('audioPlayer').play();
           fetch('http://localhost:5000/api/hello')
               .then(response => response.text())
               .then(data => {
