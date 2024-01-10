@@ -4,20 +4,71 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Game</title>
+    <title>Death or Glory</title>
+    <style>
+      body {
+        background-color: #ddb224; 
+      }
+      .center-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+      }
+      h1 {
+        text-align: center;
+        position: absolute;
+        top: 25%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 4em; /* Change this value to adjust the font size */
+      }
+      #gameInfo {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      }
+      #message {
+      font-size: 38px; /* Change this to the size you want */
+      margin-bottom: 20px; /* Add some space below the welcome message */
+      }
+      #joinGameButton {
+      margin: auto;
+      }
+    </style>
   </head>
   <body>
-    <button id="myButton">Click me</button>
-    <div id="message"></div>
-    <script>
+    <div class="center-content">
+      <h1>Death or Glory</h1>
+      <label for="name">Enter Your Player Name:</label>
+      <input type="text" id="name" name="name" autocomplete="off" style="width: 200px; height: 30px; padding: 5px;">
+      <button id="myButton">Submit</button>
+    </div>
+    <br>
+    <div id="gameInfo" style="display: none;">
+      <div id="message"></div>
+      <button id="joinGameButton">Join Game</button>
+    </div>
+      <script>
       document.getElementById('myButton').onclick = function() {
-          fetch('http://localhost:5000/api/hello')
-              .then(response => response.text())
-              .then(data => {
-                  document.getElementById('message').innerText = data;
-              })
-              .catch(error => console.error('Error:', error));
+      var name = document.getElementById('name').value;
+      document.getElementById('message').innerText = "Welcome, " + name + "!";
+      document.getElementById('joinGameButton').style.display = 'block';
+
+      // Hide the form elements
+      document.getElementById('name').style.display = 'none';
+      document.querySelector('label[for="name"]').style.display = 'none';
+      document.getElementById('myButton').style.display = 'none';
+      // Show the game info
+      document.getElementById('gameInfo').style.display = 'block';
       };
-    </script>
+      </script>
   </body>
 </html>
