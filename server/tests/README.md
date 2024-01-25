@@ -4,6 +4,8 @@
 
 https://www.python.org/downloads/
 
+Run the installer. Ensure to check the option "Add Python to PATH" during installation.
+
 ### Install Anaconda
 
 https://www.anaconda.com/download
@@ -17,5 +19,8 @@ Or replace with a name of your choice
 - `.\dog\Scripts\activate`
 - Navigate to the root of the project
 - `pip install -r requirements.txt`
-- navigate to /server/tests
+
+### run tests
+
+- Navigate to /server/tests
 - `python test_app.py`
