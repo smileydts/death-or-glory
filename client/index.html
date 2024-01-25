@@ -7,68 +7,284 @@
     <title>Death or Glory</title>
     <style>
       body {
-        background-color: #ddb224; 
-      }
-      .center-content {
+        overflow: hidden;  
+        background-image:  url('Layer 1.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+      
+.center-content {
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: center;
+        justify-content: flex-start;
         height: 100vh;
+        padding-top: 300px;
       }
+
       h1 {
         text-align: center;
-        position: absolute;
-        top: 25%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        font-size: 4em; /* Change this value to adjust the font size */
+        position: relative;
+                    font-size: 4em; /* Change this value to adjust the font size */
+                    margin-bottom: 20px; /* Add some space below the h1 */
+                    margin-top: 150px;
       }
-      #gameInfo {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
+
+       #name {
+        margin-top: 15px;}
+
+    
+      #Submit {
+        margin-top: 15px;
       }
-      #message {
-      font-size: 38px; /* Change this to the size you want */
-      margin-bottom: 20px; /* Add some space below the welcome message */
-      }
-      #joinGameButton {
-      margin: auto;
-      }
+      
+      label {
+  font-size: 2em; /* Adjust this value to change the font size */
+  margin-top: 60px;
+}
     </style>
   </head>
   <body>
     <div class="center-content">
-      <h1>Death or Glory</h1>
+      <h1 id="Heading">Death or Glory</h1>
       <label for="name">Enter Your Player Name:</label>
       <input type="text" id="name" name="name" autocomplete="off" style="width: 200px; height: 30px; padding: 5px;">
-      <button id="myButton">Submit</button>
-    </div>
-    <br>
-    <div id="gameInfo" style="display: none;">
-      <div id="message"></div>
-      <button id="joinGameButton">Join Game</button>
-    </div>
-      <script>
-      document.getElementById('myButton').onclick = function() {
+      <button id="Submit">Submit</button>
+      <div id="message"></div> 
+      <button id="joinGameButton" style="display: none;">Join Game</button>
+        </div>
+          
+    <script>
+      document.getElementById('Submit').onclick = function() {
       var name = document.getElementById('name').value;
       document.getElementById('message').innerText = "Welcome, " + name + "!";
-      document.getElementById('joinGameButton').style.display = 'block';
 
-      // Hide the form elements
-      document.getElementById('name').style.display = 'none';
+        // Show the "Join Game" button
+  document.getElementById('joinGameButton').style.display = 'block';
+  
+  document.getElementById('name').style.display = 'none';
       document.querySelector('label[for="name"]').style.display = 'none';
-      document.getElementById('myButton').style.display = 'none';
-      // Show the game info
-      document.getElementById('gameInfo').style.display = 'block';
-      };
-      </script>
+      document.getElementById('Submit').style.display = 'none';
+
+    };
+
+    document.getElementById('joinGameButton').onclick = function() {
+  // Hide the .center-content div
+  document.querySelector('.center-content').style.display = 'none';
+
+   // Create a new container
+   var newContainer = document.createElement('div');
+  newContainer.id = 'GameLayout';
+  
+  // Create the header
+  var header = document.createElement('div');
+  header.id = 'header';
+  var name = document.getElementById('name').value; // Get the name
+  header.innerText = 'Death or Glory - Player ' + name; // Add the name to the header text
+
+   // Append the header to the new container
+   newContainer.appendChild(header);
+
+   var row1 = document.createElement('div');
+  row1.id = 'TurnTracker';
+  row1.innerText = 'Turn Tracker';
+
+  // Append the new div to the new container
+  newContainer.appendChild(row1);
+
+   // Create a new div for row 2
+  var row2 = document.createElement('div');
+  row2.id = 'PlayerStats';
+  row2.innerText = 'Player Stats';
+
+  // Append the new div to the new container
+  newContainer.appendChild(row2);
+
+     // Create a new div for column 3
+   var column3 = document.createElement('div');
+  column3.id = 'DieRoll';
+  column3.innerText = 'Die Roll';
+
+  // Append the new div to the new container
+  newContainer.appendChild(column3);
+
+  var row3 = document.createElement('div');
+  row3.id = 'Timer';
+  row3.innerText = 'Timer';
+
+  // Append the new div to the new container
+  newContainer.appendChild(row3);
+
+  var row4 = document.createElement('div');
+  row4.id = 'Cards';
+  row4.innerText = 'Cards';
+
+  // Append the new div to the new container
+  newContainer.appendChild(row4);
+
+  var column4 = document.createElement('div');
+  column4.id = 'TextBox';
+  column4.innerText = 'Text Box';
+
+  // Append the new div to the new container
+  newContainer.appendChild(column4);
+
+  var img1 = document.createElement('img');
+img1.src = "PlayerIcon.png";
+img1.alt = "Player1Icon";
+img1.id = "Player1Icon";
+row2.appendChild(img1);
+
+var img2 = document.createElement('img');
+img2.src = "PlayerIcon.png";
+img2.alt = "Player2Icon";
+img2.id = "Player2Icon";
+row2.appendChild(img2);
+
+var img3 = document.createElement('img');
+img3.src = "PlayerIcon.png";
+img3.alt = "Player3Icon";
+img3.id = "Player3Icon";
+row2.appendChild(img3);
+
+var img4 = document.createElement('img');
+img4.src = "PlayerIcon.png";
+img4.alt = "Player4Icon";
+img4.id = "Player4Icon";
+row2.appendChild(img4);
+  
+  // Append the new container to the body
+  document.body.appendChild(newContainer);
+    }
+
+    </script>
+
+<style>
+        
+  #joinGameButton {
+margin: auto;
+margin-top: 20px;
+      }
+
+#message {
+font-size: 38px; /* Change this to the size you want */
+margin-bottom: 20px; /* Add some space below the welcome message */
+margin-top: 30px;
+}
+  </style>
+     
+     <style>
+
+      #GameLayout {
+        width: 100%; /* Take up the full width */
+      height: 100vh; /* Take up the full viewport height */
+      position: relative;
+            display: grid;
+      grid-template-columns: 1fr 1fr 400px;
+      grid-template-rows: 75px 1fr 1fr 325px;
+      gap:10px;
+      padding:10px;
+      box-sizing: border-box;
+        border: 1px solid black;
+        padding: 10px;
+      }
+      #header {
+        grid-column-start: 1;
+        grid-column-end: 2;
+        grid-row: 1;
+        border: 2px solid black;
+        font: 3em sans-serif;
+        display: flex;
+  align-items: center;
+  padding: 10px; /* Add this line */
+      }
+
+      #TurnTracker {
+        grid-row-start: 1;
+        grid-row-end: span 1;
+        grid-column-start: 2;
+        grid-column-end: 4;
+        border: 2px solid black;
+        font: 3em sans-serif;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        padding: 10px; /* Add this line */
+              }
+
+      #PlayerStats {
+        grid-row-start: 2;
+        grid-row-end: span 2;
+        grid-column-start: 1;
+        grid-column-end: 3;
+        position: relative;
+        border: 2px solid black;
+        font: 3em sans-serif;
+      }
+      #DieRoll {
+        grid-row-start: 2;  
+        grid-row-end: span 1;
+        grid-column-start: 3;
+        grid-column-end: 4;
+        border: 2px solid black;
+        font: 3em sans-serif;
+      }
+      #Timer {
+        grid-row-start: 3;
+        grid-row-end: span 1;
+        grid-column-start: 3;
+        grid-column-end: 4;
+        border: 2px solid black;
+        font: 3em sans-serif;
+      }
+      #Cards {
+        grid-row-start: 4;
+        grid-row-end: span 1;
+        grid-column-start: 1;
+        grid-column-end: 3;
+        border: 2px solid black;
+        font: 3em sans-serif;
+      }
+
+      #TextBox {
+        grid-row-start: 4;
+        grid-row-end: span 1;
+        grid-column-start: 3;
+        grid-column-end: 4;
+        border: 2px solid black;
+        font: 3em sans-serif;
+      }
+
+      #Player1Icon {
+        bottom: 40px;  
+        left: 700px;
+        position: absolute;
+      }
+
+      #Player2Icon {
+        right: 75px;
+        bottom: 350px;
+        position:absolute;
+      }
+
+      #Player3Icon {
+        top: 40px;
+        left: 700px;
+        position: absolute;
+      }
+
+      #Player4Icon {
+        left: 75px;
+        bottom: 350px;
+        position: absolute;
+      }
+
+              </style>
+           
+                   
+        
   </body>
 </html>
