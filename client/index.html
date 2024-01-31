@@ -22,28 +22,28 @@
         align-items: center;
         justify-content: flex-start;
         height: 100vh;
-        padding-top: 300px;
+        padding-top: 20vh;
       }
 
       h1 {
         text-align: center;
         position: relative;
                     font-size: 4em; /* Change this value to adjust the font size */
-                    margin-bottom: 20px; /* Add some space below the h1 */
-                    margin-top: 150px;
+                    margin-bottom: 4vh; /* Add some space below the h1 */
+                    margin-top: 15vh;
       }
 
        #name {
-        margin-top: 15px;}
+        margin-top: 3vh;}
 
     
       #Submit {
-        margin-top: 15px;
+        margin-top: 3vh;
       }
       
       label {
   font-size: 2em; /* Adjust this value to change the font size */
-  margin-top: 60px;
+  margin-top: 3vh;
 }
     </style>
   </head>
@@ -155,6 +155,52 @@ img4.src = "PlayerIcon.png";
 img4.alt = "Player4Icon";
 img4.id = "Player4Icon";
 row2.appendChild(img4);
+
+var newTextBox = document.createElement('div');
+  newTextBox.id = 'Player1Stats'; // Give the new text box an id
+  newTextBox.innerHTML = 'Player Name:<br>Sex and Drug Amount:<br>Prestige Amount:<br>Artist Type:<br>'; // Add some text
+  row2.appendChild(newTextBox); // Append the new text box to the new container
+
+  var newTextBox2 = document.createElement('div');
+  newTextBox2.id = 'Player2Stats'; // Give the new text box an id
+  newTextBox2.innerHTML = 'Player Name:<br>Sex and Drug Amount:<br>Prestige Amount:<br>Artist Type:<br>'; // Add some text
+  row2.appendChild(newTextBox2); // Append the new text box to the new container
+
+var newTextBox3 = document.createElement('div');
+  newTextBox3.id = 'Player3Stats'; // Give the new text box an id
+  newTextBox3.innerHTML = 'Player Name:<br>Sex and Drug Amount:<br>Prestige Amount:<br>Artist Type:<br>'; // Add some text
+  row2.appendChild(newTextBox3); // Append the new text box to the new container
+
+var newTextBox4 = document.createElement('div');
+  newTextBox4.id = 'Player4Stats'; // Give the new text box an id
+  newTextBox4.innerHTML = 'Player Name:<br>Sex and Drug Amount:<br>Prestige Amount:<br>Artist Type:<br>'; // Add some text
+  row2.appendChild(newTextBox4); // Append the new text box to the new container
+
+  // Create a new div element
+var rectangleContainer = document.createElement('div');
+rectangleContainer.id = 'Card1';
+rectangleContainer.innerHTML = 'Card 1'; // Add some text
+row4.appendChild(rectangleContainer);
+
+var rectangleContainer2 = document.createElement('div');
+rectangleContainer2.id = 'Card2';
+rectangleContainer2.innerHTML = 'Card 2'; // Add some text
+row4.appendChild(rectangleContainer2);
+
+var rectangleContainer3 = document.createElement('div');
+rectangleContainer3.id = 'Card3';
+rectangleContainer3.innerHTML = 'Card 3'; // Add some text
+row4.appendChild(rectangleContainer3);
+
+var rectangleContainer4 = document.createElement('div');
+rectangleContainer4.id = 'Card4';
+rectangleContainer4.innerHTML = 'Card 4'; // Add some text
+row4.appendChild(rectangleContainer4);
+
+var rectangleContainer5 = document.createElement('div');
+rectangleContainer5.id = 'Card5';
+rectangleContainer5.innerHTML = 'Card 5'; // Add some text
+row4.appendChild(rectangleContainer5);
   
   // Append the new container to the body
   document.body.appendChild(newContainer);
@@ -166,13 +212,13 @@ row2.appendChild(img4);
         
   #joinGameButton {
 margin: auto;
-margin-top: 20px;
+margin-top: 3vh;
       }
 
 #message {
 font-size: 38px; /* Change this to the size you want */
-margin-bottom: 20px; /* Add some space below the welcome message */
-margin-top: 30px;
+margin-bottom: 3vh; /* Add some space below the welcome message */
+margin-top: 4vh;
 }
   </style>
      
@@ -183,8 +229,8 @@ margin-top: 30px;
       height: 100vh; /* Take up the full viewport height */
       position: relative;
             display: grid;
-      grid-template-columns: 1fr 1fr 400px;
-      grid-template-rows: 75px 1fr 1fr 325px;
+      grid-template-columns: 1fr 1fr 20vw;
+      grid-template-rows: 7vh 1fr 1fr 30vh;
       gap:10px;
       padding:10px;
       box-sizing: border-box;
@@ -247,6 +293,7 @@ margin-top: 30px;
         grid-column-end: 3;
         border: 2px solid black;
         font: 3em sans-serif;
+        position: relative;
       }
 
       #TextBox {
@@ -259,29 +306,147 @@ margin-top: 30px;
       }
 
       #Player1Icon {
-        bottom: 40px;  
-        left: 700px;
+        bottom: 2vh;  
+        left: 33vw;
+        height: 20vh;
+        width: auto;
         position: absolute;
       }
 
       #Player2Icon {
-        right: 75px;
-        bottom: 350px;
-        position:absolute;
+        right: 5vw;
+        bottom: 20vh;
+        height: 20vh;
+        width: auto;
+        position: absolute;
       }
 
       #Player3Icon {
-        top: 40px;
-        left: 700px;
+        top: 2vh;
+        left: 33vw;
+        height: 20vh;
+        width: auto;
         position: absolute;
       }
 
       #Player4Icon {
-        left: 75px;
-        bottom: 350px;
+        left: 5vw;
+        bottom: 20vh;
+        height: 20vh;
+        width: auto;
         position: absolute;
       }
 
+      #Player1Stats {
+        bottom: 2vh;
+        left: 44vw;
+        position: absolute;
+        font-size: 25px;
+        border: 2px solid black;
+        padding-left: 4px;
+        padding-right: 50px;
+      }
+
+      #Player2Stats {
+        right: 1.75vw;
+        bottom: 8vh;
+        position: absolute;
+        font-size: 25px;
+        border: 2px solid black;
+        padding-left: 4px;
+        padding-right: 50px;
+      }
+
+      #Player3Stats {
+        top: 2vh;
+        left: 44vw;
+        position: absolute;
+        font-size: 25px;
+        border: 2px solid black;
+        padding-left: 4px;
+        padding-right: 50px;
+      }
+
+      #Player4Stats {
+        left: 5vw;
+        bottom: 8vh;
+        position: absolute;
+        font-size: 25px;
+        border: 2px solid black;
+        padding-left: 4px;
+        padding-right: 50px;
+      }
+
+      #Card1 {
+        position: absolute;
+        top:2vh;
+        left: 8vw;
+        height: 25vh;
+        width: 10vw;
+        border: 2px solid black;
+        font-size: 30px;
+        display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white
+      }
+
+      #Card2 {
+        position: absolute;
+        top:2vh;
+        left: 22vw;
+        height: 25vh;
+        width: 10vw;
+        border: 2px solid black;
+        font-size: 30px;
+        display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+      }
+
+      #Card3 {
+        position: absolute;
+        top:2vh;
+        left: 36vw;
+        height: 25vh;
+        width: 10vw;
+        border: 2px solid black;
+        font-size: 30px;
+        display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+      }
+
+      #Card4 {
+        position: absolute;
+        top:2vh;
+        left: 50vw;
+        height: 25vh;
+        width: 10vw;
+        border: 2px solid black;
+        font-size: 30px;
+        display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+      }
+
+      #Card5 {
+        position: absolute;
+        top:2vh;
+        left: 64vw;
+        height: 25vh;
+        width: 10vw;
+        border: 2px solid black;
+        font-size: 30px;
+        display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+      }
+      
               </style>
            
                    
