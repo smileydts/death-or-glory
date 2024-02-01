@@ -177,33 +177,204 @@ var newTextBox4 = document.createElement('div');
   row2.appendChild(newTextBox4); // Append the new text box to the new container
 
   // Create a new div element
-var rectangleContainer = document.createElement('div');
+var rectangleContainer = document.createElement('card');
 rectangleContainer.id = 'Card1';
 rectangleContainer.innerHTML = 'Card 1'; // Add some text
 row4.appendChild(rectangleContainer);
 
-var rectangleContainer2 = document.createElement('div');
+var rectangleContainer2 = document.createElement('card');
 rectangleContainer2.id = 'Card2';
 rectangleContainer2.innerHTML = 'Card 2'; // Add some text
 row4.appendChild(rectangleContainer2);
 
-var rectangleContainer3 = document.createElement('div');
+var rectangleContainer3 = document.createElement('card');
 rectangleContainer3.id = 'Card3';
 rectangleContainer3.innerHTML = 'Card 3'; // Add some text
 row4.appendChild(rectangleContainer3);
 
-var rectangleContainer4 = document.createElement('div');
+var rectangleContainer4 = document.createElement('card');
 rectangleContainer4.id = 'Card4';
 rectangleContainer4.innerHTML = 'Card 4'; // Add some text
 row4.appendChild(rectangleContainer4);
 
-var rectangleContainer5 = document.createElement('div');
+var rectangleContainer5 = document.createElement('card');
 rectangleContainer5.id = 'Card5';
 rectangleContainer5.innerHTML = 'Card 5'; // Add some text
 row4.appendChild(rectangleContainer5);
+
+
+var button = document.createElement('button');
+button.id = 'CashIn';
+button.innerText = 'Cash In'; // Add some text
+row4.appendChild(button);
+
+var button2 = document.createElement('button');
+button2.id = 'Play';
+button2.innerText = 'Play'; // Add some text
+row4.appendChild(button2);
+
+var button3 = document.createElement('button');
+button3.id = 'Discard';
+button3.innerText = 'Discard'; // Add some text
+row4.appendChild(button3);
   
   // Append the new container to the body
   document.body.appendChild(newContainer);
+
+  // Get the rectangleContainer
+var rectangleContainer = document.getElementById('Card1');
+
+// Variables to store the original position of the rectangleContainer
+var originalTop, originalLeft;
+
+// Add a click event listener to the rectangleContainer
+rectangleContainer.addEventListener('click', function() {
+  // Check if the rectangleContainer has the 'enlarged' class
+  if (rectangleContainer.classList.contains('enlarged')) {
+    // If it does, remove the class and return it to its original size and position
+    rectangleContainer.classList.remove('enlarged');
+    rectangleContainer.style.transform = 'scale(1)'; // Adjust as needed
+    rectangleContainer.style.position = 'absolute';
+    rectangleContainer.style.top = originalTop + 'px';
+    rectangleContainer.style.left = originalLeft + 'px';
+  } else {
+    // If it doesn't, add the class and enlarge the rectangleContainer and move it to the center of the screen
+    // Save the original position of the rectangleContainer
+    originalTop = rectangleContainer.offsetTop;
+    originalLeft = rectangleContainer.offsetLeft;
+
+    rectangleContainer.classList.add('enlarged');
+    rectangleContainer.style.transform = 'scale(2)'; // Adjust as needed
+    rectangleContainer.style.position = 'fixed';
+    rectangleContainer.style.top = '50%';
+    rectangleContainer.style.left = '50%';
+    rectangleContainer.style.transform += 'translate(-50%, -50%)';
+  }
+});
+
+// Get the rectangleContainer2
+var rectangleContainer2 = document.getElementById('Card2');
+
+// Variables to store the original position of the rectangleContainer2
+var originalTop2, originalLeft2;
+
+// Add a click event listener to the rectangleContainer2
+rectangleContainer2.addEventListener('click', function() {
+  // Check if the rectangleContainer2 has the 'enlarged' class
+  if (rectangleContainer2.classList.contains('enlarged')) {
+    // If it does, remove the class and return it to its original size and position
+    rectangleContainer2.classList.remove('enlarged');
+    rectangleContainer2.style.transform = 'scale(1)'; // Adjust as needed
+    rectangleContainer2.style.position = 'absolute';
+    rectangleContainer2.style.top = originalTop2 + 'px';
+    rectangleContainer2.style.left = originalLeft2 + 'px';
+  } else {
+    // If it doesn't, add the class and enlarge the rectangleContainer2 and move it to the center of the screen
+    // Save the original position of the rectangleContainer2
+    originalTop2 = rectangleContainer2.offsetTop;
+    originalLeft2 = rectangleContainer2.offsetLeft;
+
+    rectangleContainer2.classList.add('enlarged');
+    rectangleContainer2.style.transform = 'scale(2)'; // Adjust as needed
+    rectangleContainer2.style.position = 'fixed';
+    rectangleContainer2.style.top = '50%';
+    rectangleContainer2.style.left = '50%';
+    rectangleContainer2.style.transform += 'translate(-50%, -50%)';
+  }
+});
+
+// Get the rectangleContainer3
+var rectangleContainer3 = document.getElementById('Card3');
+
+// Variables to store the original position of the rectangleContainer3
+var originalTop3, originalLeft3;
+
+// Add a click event listener to the rectangleContainer3
+rectangleContainer3.addEventListener('click', function() {
+  // Check if the rectangleContainer3 has the 'enlarged' class
+  if (rectangleContainer3.classList.contains('enlarged')) {
+    // If it does, remove the class and return it to its original size and position
+    rectangleContainer3.classList.remove('enlarged');
+    rectangleContainer3.style.transform = 'scale(1)'; // Adjust as needed
+    rectangleContainer3.style.position = 'absolute';
+    rectangleContainer3.style.top = originalTop3 + 'px';
+    rectangleContainer3.style.left = originalLeft3 + 'px';
+  } else {
+    // If it doesn't, add the class and enlarge the rectangleContainer3 and move it to the center of the screen
+    // Save the original position of the rectangleContainer3
+    originalTop3 = rectangleContainer3.offsetTop;
+    originalLeft3 = rectangleContainer3.offsetLeft;
+
+    rectangleContainer3.classList.add('enlarged');
+    rectangleContainer3.style.transform = 'scale(2)'; // Adjust as needed
+    rectangleContainer3.style.position = 'fixed';
+    rectangleContainer3.style.top = '50%';
+    rectangleContainer3.style.left = '50%';
+    rectangleContainer3.style.transform += 'translate(-50%, -50%)';
+  }
+});
+
+// Get the rectangleContainer4
+var rectangleContainer4 = document.getElementById('Card4');
+
+// Variables to store the original position of the rectangleContainer4
+var originalTop4, originalLeft4;
+
+// Add a click event listener to the rectangleContainer4
+rectangleContainer4.addEventListener('click', function() {
+  // Check if the rectangleContainer4 has the 'enlarged' class
+  if (rectangleContainer4.classList.contains('enlarged')) {
+    // If it does, remove the class and return it to its original size and position
+    rectangleContainer4.classList.remove('enlarged');
+    rectangleContainer4.style.transform = 'scale(1)'; // Adjust as needed
+    rectangleContainer4.style.position = 'absolute';
+    rectangleContainer4.style.top = originalTop4 + 'px';
+    rectangleContainer4.style.left = originalLeft4 + 'px';
+  } else {
+    // If it doesn't, add the class and enlarge the rectangleContainer4 and move it to the center of the screen
+    // Save the original position of the rectangleContainer4
+    originalTop4 = rectangleContainer4.offsetTop;
+    originalLeft4 = rectangleContainer4.offsetLeft;
+
+    rectangleContainer4.classList.add('enlarged');
+    rectangleContainer4.style.transform = 'scale(2)'; // Adjust as needed
+    rectangleContainer4.style.position = 'fixed';
+    rectangleContainer4.style.top = '50%';
+    rectangleContainer4.style.left = '50%';
+    rectangleContainer4.style.transform += 'translate(-50%, -50%)';
+  }
+});
+
+// Get the rectangleContainer5
+var rectangleContainer5 = document.getElementById('Card5');
+
+// Variables to store the original position of the rectangleContainer5
+var originalTop5, originalLeft5;
+
+// Add a click event listener to the rectangleContainer5
+rectangleContainer5.addEventListener('click', function() {
+  // Check if the rectangleContainer5 has the 'enlarged' class
+  if (rectangleContainer5.classList.contains('enlarged')) {
+    // If it does, remove the class and return it to its original size and position
+    rectangleContainer5.classList.remove('enlarged');
+    rectangleContainer5.style.transform = 'scale(1)'; // Adjust as needed
+    rectangleContainer5.style.position = 'absolute';
+    rectangleContainer5.style.top = originalTop5 + 'px';
+    rectangleContainer5.style.left = originalLeft5 + 'px';
+  } else {
+    // If it doesn't, add the class and enlarge the rectangleContainer5 and move it to the center of the screen
+    // Save the original position of the rectangleContainer5
+    originalTop5 = rectangleContainer5.offsetTop;
+    originalLeft5 = rectangleContainer5.offsetLeft;
+
+    rectangleContainer5.classList.add('enlarged');
+    rectangleContainer5.style.transform = 'scale(2)'; // Adjust as needed
+    rectangleContainer5.style.position = 'fixed';
+    rectangleContainer5.style.top = '50%';
+    rectangleContainer5.style.left = '50%';
+    rectangleContainer5.style.transform += 'translate(-50%, -50%)';
+  }
+});
     }
 
     </script>
@@ -307,14 +478,14 @@ margin-top: 4vh;
 
       #Player1Icon {
         bottom: 2vh;  
-        left: 33vw;
+        left: 31vw;
         height: 20vh;
         width: auto;
         position: absolute;
       }
 
       #Player2Icon {
-        right: 5vw;
+        right: 8vw;
         bottom: 20vh;
         height: 20vh;
         width: auto;
@@ -323,14 +494,14 @@ margin-top: 4vh;
 
       #Player3Icon {
         top: 2vh;
-        left: 33vw;
+        left: 31vw;
         height: 20vh;
         width: auto;
         position: absolute;
       }
 
       #Player4Icon {
-        left: 5vw;
+        left: 3vw;
         bottom: 20vh;
         height: 20vh;
         width: auto;
@@ -339,42 +510,46 @@ margin-top: 4vh;
 
       #Player1Stats {
         bottom: 2vh;
-        left: 44vw;
+        left: 42vw;
         position: absolute;
-        font-size: 25px;
+        font-size: 22px;
+        font-style: bold;
         border: 2px solid black;
-        padding-left: 4px;
-        padding-right: 50px;
+        padding-left: .5vw;
+        padding-right: 4vw;
       }
 
       #Player2Stats {
         right: 1.75vw;
         bottom: 8vh;
         position: absolute;
-        font-size: 25px;
+        font-size: 22px;
+        font-style: bold;
         border: 2px solid black;
-        padding-left: 4px;
-        padding-right: 50px;
+        padding-left: .5vw;
+        padding-right: 4vw;
       }
 
       #Player3Stats {
         top: 2vh;
-        left: 44vw;
+        left: 42vw;
         position: absolute;
-        font-size: 25px;
+        font-size: 22px;
+        font-style: bold;
         border: 2px solid black;
-        padding-left: 4px;
-        padding-right: 50px;
+        padding-left: .5vw;
+        padding-right: 4vw;
       }
 
       #Player4Stats {
-        left: 5vw;
+        left: 3vw;
         bottom: 8vh;
         position: absolute;
-        font-size: 25px;
+        font-size: 22px;
+        font-style: bold;
         border: 2px solid black;
-        padding-left: 4px;
-        padding-right: 50px;
+        padding-left: .5vw;
+        padding-right: 4vw;
       }
 
       #Card1 {
@@ -394,7 +569,7 @@ margin-top: 4vh;
       #Card2 {
         position: absolute;
         top:2vh;
-        left: 22vw;
+        left: 20vw;
         height: 25vh;
         width: 10vw;
         border: 2px solid black;
@@ -408,7 +583,7 @@ margin-top: 4vh;
       #Card3 {
         position: absolute;
         top:2vh;
-        left: 36vw;
+        left: 32vw;
         height: 25vh;
         width: 10vw;
         border: 2px solid black;
@@ -422,7 +597,7 @@ margin-top: 4vh;
       #Card4 {
         position: absolute;
         top:2vh;
-        left: 50vw;
+        left: 44vw;
         height: 25vh;
         width: 10vw;
         border: 2px solid black;
@@ -436,7 +611,7 @@ margin-top: 4vh;
       #Card5 {
         position: absolute;
         top:2vh;
-        left: 64vw;
+        left: 56vw;
         height: 25vh;
         width: 10vw;
         border: 2px solid black;
@@ -446,10 +621,56 @@ margin-top: 4vh;
   align-items: center;
   background-color: white;
       }
+
+      #CashIn {
+        position: absolute;
+        top: 5vh;
+        left: 70vw;
+        height: 4vh;
+        width: 6vw;
+        border: 2px solid rgb(0, 0, 0);
+        font-size: 30px;
+        color: white; 
+         background-color: red;
+         display: flex;
+  justify-content: center;
+  align-items: center;
+      }
+
+      #Play {
+        position: absolute;
+        top: 12vh;
+        left: 70vw;
+        height: 4vh;
+        width: 6vw;
+        border: 2px solid rgb(0, 0, 0);
+        font-size: 30px;
+        color: white;
+        background-color: red;
+        display: flex;
+  justify-content: center;
+  align-items: center;
+      }
+
+      #Discard {
+        position: absolute;
+        top: 19vh;
+        left: 70vw;
+        height: 4vh;
+        width: 6vw;
+        border: 2px solid rgb(0, 0, 0);
+        font-size: 30px;
+        color: white;
+        background-color: red;
+        display: flex;
+  justify-content: center;
+  align-items: center;
+      }
+             
       
               </style>
            
-                   
+            
         
   </body>
 </html>
