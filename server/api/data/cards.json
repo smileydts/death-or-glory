@@ -1,0 +1,34 @@
+[
+   {
+      "id":"record_1",
+      "type":"record",
+      "value":3,
+      "cost":5,
+      "count":[
+         6,
+         4,
+         2
+      ],
+      "min_roll":8,
+      "prestige":2,
+      "text":{
+         "display":"Record Level 1",
+         "hover":"Roll two dice - sum must be #min_roll# or greater"
+      }
+   },
+   {
+      "id":"record_modifier_1",
+      "type":"record_modifier",
+      "value":4,
+      "cost":0,
+      "count":[
+         4,
+         2,
+         1
+      ],
+      "text":{
+         "display":"Record Modifier 1",
+         "hover":"Add 1 to the sum of any record attempt - play in conjunction with record card"
+      }
+   }
+]
