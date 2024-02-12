@@ -218,6 +218,10 @@ button3.id = 'Discard';
 button3.innerText = 'Discard'; // Add some text
 row4.appendChild(button3);
   
+document.getElementById('joinGameButton').addEventListener('click', function() {
+  console.log('Hello World');
+});
+
   // Append the new container to the body
   document.body.appendChild(newContainer);
 
@@ -625,24 +629,26 @@ margin-top: 4vh;
       #CashIn {
         position: absolute;
         top: 5vh;
-        left: 70vw;
+        left: 69vw;
         height: 4vh;
-        width: 6vw;
+        width: 7vw;
         border: 2px solid rgb(0, 0, 0);
         font-size: 30px;
         color: white; 
-         background-color: red;
+         background-color: rgb(1, 131, 29);
          display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden; /* Prevent the text from spilling out of the button */
+  white-space: nowrap; /* Prevent the text from wrapping to the next line */
       }
 
       #Play {
         position: absolute;
-        top: 12vh;
-        left: 70vw;
+        top: 13vh;
+        left: 69vw;
         height: 4vh;
-        width: 6vw;
+        width: 7vw;
         border: 2px solid rgb(0, 0, 0);
         font-size: 30px;
         color: white;
@@ -654,14 +660,14 @@ margin-top: 4vh;
 
       #Discard {
         position: absolute;
-        top: 19vh;
-        left: 70vw;
+        top: 21vh;
+        left: 69vw;
         height: 4vh;
-        width: 6vw;
+        width: 7vw;
         border: 2px solid rgb(0, 0, 0);
         font-size: 30px;
         color: white;
-        background-color: red;
+        background-color: rgb(0, 0, 0);
         display: flex;
   justify-content: center;
   align-items: center;
