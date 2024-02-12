@@ -218,9 +218,7 @@ button3.id = 'Discard';
 button3.innerText = 'Discard'; // Add some text
 row4.appendChild(button3);
   
-document.getElementById('joinGameButton').addEventListener('click', function() {
-  console.log('Hello World');
-});
+
 
   // Append the new container to the body
   document.body.appendChild(newContainer);
@@ -676,7 +674,24 @@ margin-top: 4vh;
       
               </style>
            
-            
+           <script>
+           document.getElementById('joinGameButton').addEventListener('click', function() {
+  var data = {name: 'Player Name'};  // Replace with actual data
+
+  var options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  };
+
+  fetch('http://localhost:5000/api/join', options)
+  .then(response => response.json())
+  .then(data => console.log('Success:', data))
+  .catch((error) => console.log('Error:', error));
+});
+            </script>
         
   </body>
 </html>
