@@ -106,11 +106,12 @@
      // Create a new div for column 3
    var column3 = document.createElement('div');
   column3.id = 'DieRoll';
-  column3.innerText = 'Die Roll';
+  
 
   // Append the new div to the new container
   newContainer.appendChild(column3);
 
+  
   var row3 = document.createElement('div');
   row3.id = 'Timer';
   row3.innerText = 'Timer';
@@ -177,27 +178,27 @@ var newTextBox4 = document.createElement('div');
   row2.appendChild(newTextBox4); // Append the new text box to the new container
 
   // Create a new div element
-var rectangleContainer = document.createElement('card');
+var rectangleContainer = document.createElement('div');
 rectangleContainer.id = 'Card1';
 rectangleContainer.innerHTML = 'Card 1'; // Add some text
 row4.appendChild(rectangleContainer);
 
-var rectangleContainer2 = document.createElement('card');
+var rectangleContainer2 = document.createElement('div');
 rectangleContainer2.id = 'Card2';
 rectangleContainer2.innerHTML = 'Card 2'; // Add some text
 row4.appendChild(rectangleContainer2);
 
-var rectangleContainer3 = document.createElement('card');
+var rectangleContainer3 = document.createElement('div');
 rectangleContainer3.id = 'Card3';
 rectangleContainer3.innerHTML = 'Card 3'; // Add some text
 row4.appendChild(rectangleContainer3);
 
-var rectangleContainer4 = document.createElement('card');
+var rectangleContainer4 = document.createElement('div');
 rectangleContainer4.id = 'Card4';
 rectangleContainer4.innerHTML = 'Card 4'; // Add some text
 row4.appendChild(rectangleContainer4);
 
-var rectangleContainer5 = document.createElement('card');
+var rectangleContainer5 = document.createElement('div');
 rectangleContainer5.id = 'Card5';
 rectangleContainer5.innerHTML = 'Card 5'; // Add some text
 row4.appendChild(rectangleContainer5);
@@ -217,12 +218,23 @@ var button3 = document.createElement('button');
 button3.id = 'Discard';
 button3.innerText = 'Discard'; // Add some text
 row4.appendChild(button3);
-  
 
+var button4 = document.createElement('button');
+button4.id = 'RollDice';
+button4.innerText = 'Roll Dice'; // Add some text
+column3.appendChild(button4);
+
+// Create a div to display the result
+var diceResult = document.createElement('div');
+diceResult.id = 'diceResult';
+column3.appendChild(diceResult);
+
+  
 
   // Append the new container to the body
   document.body.appendChild(newContainer);
 
+  
   // Get the rectangleContainer
 var rectangleContainer = document.getElementById('Card1');
 
@@ -381,6 +393,8 @@ rectangleContainer5.addEventListener('click', function() {
 
     </script>
 
+
+
 <style>
         
   #joinGameButton {
@@ -450,6 +464,7 @@ margin-top: 4vh;
         grid-column-end: 4;
         border: 2px solid black;
         font: 3em sans-serif;
+        position: relative;
       }
       #Timer {
         grid-row-start: 3;
@@ -670,6 +685,30 @@ margin-top: 4vh;
   justify-content: center;
   align-items: center;
       }
+
+      #RollDice {
+        position: absolute;
+        top: 2vh;
+              height: 6vh;
+        width: 8vw;
+        border: 2px solid rgb(0, 0, 0);
+        font-size: 30px;
+        color: white;
+        background-color: rgb(0, 0, 0);
+        display: flex;
+  justify-content: center;
+  align-items: center;
+      }
+
+      #diceResult {
+        position: absolute;
+        top: 12vh;
+        font-size: 30px;
+        color: rgb(0, 0, 0);
+        display: flex;
+  justify-content: center;
+  align-items: center;
+      }
              
       
               </style>
@@ -688,10 +727,22 @@ margin-top: 4vh;
 
   fetch('http://localhost:5000/api/join', options)
   .then(response => response.json())
-  .then(data => console.log('Success:', data))
+  .then(data => {
+    console.log('Success:', data);
+    document.cookie = `player_id=${data.player_id}; path=/`;
+  })
   .catch((error) => console.log('Error:', error));
+
+   // Second fetch call
+   fetch('http://localhost:5000/api/players', options)
+    .then(response => response.json())
+    .then(data => console.log('Players:', data))
+    .catch((error) => console.log('Error:', error));
+
+     
 });
             </script>
-        
+  
+                    
   </body>
 </html>
