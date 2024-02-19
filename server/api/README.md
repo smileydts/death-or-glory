@@ -12,6 +12,6 @@
 
 - **Purpose**: Returns a list of all players in the game from the perspective of the requester.  Positions are 0-indexed and are intended to be displayed clockwise starting with the south position.
 - **Method**: POST
-- **URL**: `/api/players`
+- **URL**: `/api/get_players`
 - **Request Payload**: `{"player_id": player_id}`
 - **Response**: Array of player objects, each with `id` and `name`.

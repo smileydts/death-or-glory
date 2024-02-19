@@ -715,7 +715,7 @@ margin-top: 4vh;
            
            <script>
            document.getElementById('joinGameButton').addEventListener('click', function() {
-  var data = {name: 'Player Name'};  // Replace with actual data
+  var data = {name: name};
 
   var options = {
     method: 'POST',
@@ -734,7 +734,7 @@ margin-top: 4vh;
   .catch((error) => console.log('Error:', error));
 
    // Second fetch call
-   fetch('http://localhost:5000/api/players', options)
+   fetch('http://localhost:5000/api/get_players', options)
     .then(response => response.json())
     .then(data => console.log('Players:', data))
     .catch((error) => console.log('Error:', error));
