@@ -8,7 +8,7 @@
       <style>
          body {
          overflow: hidden;  
-         background-image:  url('Layer 1.jpg');
+         background-image:  url('images/Layer1.jpg');
          background-repeat: no-repeat;
          background-size: cover;
          margin: 0;
@@ -127,25 +127,25 @@
          newContainer.appendChild(column4);
          
          var img1 = document.createElement('img');
-         img1.src = "PlayerIcon.png";
+         img1.src = "images/PLayerIcon.png";
          img1.alt = "Player1Icon";
          img1.id = "Player1Icon";
          row2.appendChild(img1);
          
          var img2 = document.createElement('img');
-         img2.src = "PlayerIcon.png";
+         img2.src = "images/PLayerIcon.png";
          img2.alt = "Player2Icon";
          img2.id = "Player2Icon";
          row2.appendChild(img2);
          
          var img3 = document.createElement('img');
-         img3.src = "PlayerIcon.png";
+         img3.src = "images/PLayerIcon.png";
          img3.alt = "Player3Icon";
          img3.id = "Player3Icon";
          row2.appendChild(img3);
          
          var img4 = document.createElement('img');
-         img4.src = "PlayerIcon.png";
+         img4.src = "images/PLayerIcon.png";
          img4.alt = "Player4Icon";
          img4.id = "Player4Icon";
          row2.appendChild(img4);
@@ -675,52 +675,6 @@
          align-items: center;
          }
       </style>
-      <script>
-
-         function createFetchOptions(data, method = 'POST') {
-            return {
-               method: method,
-               headers: {
-                  'Content-Type': 'application/json',
-               },
-               body: JSON.stringify(data),
-            };
-         }
-
-         document.getElementById('joinGameButton').addEventListener('click', function() {
-            const name = document.getElementById('name').value;
-            async function joinGame(name) {
-               try {
-                  const data1 = {name: name};
-         
-                  const options1 = createFetchOptions(data1)
-                  
-                  const response1 = await fetch('http://localhost:5000/api/join', options1);
-                  if (!response1.ok) {
-                     throw new Error('Network response was not ok');
-                  }
-                  const output1 = await response1.json();
-                  console.log('Success:', output1);
-                  document.cookie = `player_id=${output1.player_id}; path=/`;
-
-                  const data2 = {player_id: output1.player_id};
-                  const options2 = createFetchOptions(data2)
-
-                  const response2 = await fetch('http://localhost:5000/api/get_players', options2)
-                  if (!response2.ok) {
-                     throw new Error('Network response was not ok');
-                  }
-                  const output2 = await response2.json();
-                  console.log('Success:', output2);
-               } catch (error) {
-                  console.log('Error:', error);
-               }
-            }
-
-            joinGame(name);
-            });
-
-          
-      </script>
+      <script src="scripts/app.js"></script>
    </body>
 </html>
