@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from models import players, max_players, Player
+from models import players, max_players, game_state, Player, GameState
 
 join = Blueprint('join', __name__)
 
@@ -13,6 +13,9 @@ def join_game():
     id = len(players)
     new_player = Player(id, data['name'])
     players.append(new_player)
+
+    if len(players) == max_players:
+        game_state = GameState(players)
     return {"player_id": id}
 
 
@@ -27,3 +30,4 @@ def get_players():
         except IndexError:
             player_view.append(Player(-1, 'null'))
     return jsonify([player.to_dict() for player in player_view])
+
