@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+    <title>Death or Glory</title>
+    <style>
+
+         #GameLayout {
+         width: 100%; /* Take up the full width */
+         height: 100vh; /* Take up the full viewport height */
+         position: relative;
+         display: grid;
+         grid-template-columns: 1fr 1fr 20vw;
+         grid-template-rows: 7vh 1fr 1fr 30vh;
+         gap:10px;
+         padding:10px;
+         box-sizing: border-box;
+         border: 1px solid black;
+         padding: 10px;
+         }
+         #header {
+         grid-column-start: 1;
+         grid-column-end: 2;
+         grid-row: 1;
+         border: 2px solid black;
+         font: 3em sans-serif;
+         display: flex;
+         align-items: center;
+         padding: 10px; /* Add this line */
+         }
+         #TurnTracker {
+         grid-row-start: 1;
+         grid-row-end: span 1;
+         grid-column-start: 2;
+         grid-column-end: 4;
+         border: 2px solid black;
+         font: 3em sans-serif;
+         display: flex;
+         justify-content: flex-end;
+         align-items: center;
+         padding: 10px; /* Add this line */
+         }
+         #PlayerStats {
+         grid-row-start: 2;
+         grid-row-end: span 2;
+         grid-column-start: 1;
+         grid-column-end: 3;
+         position: relative;
+         border: 2px solid black;
+         font: 3em sans-serif;
+         }
+         #DieRoll {
+         grid-row-start: 2;  
+         grid-row-end: span 1;
+         grid-column-start: 3;
+         grid-column-end: 4;
+         border: 2px solid black;
+         font: 3em sans-serif;
+         position: relative;
+         }
+         #Timer {
+         grid-row-start: 3;
+         grid-row-end: span 1;
+         grid-column-start: 3;
+         grid-column-end: 4;
+         border: 2px solid black;
+         font: 3em sans-serif;
+         }
+         #Cards {
+         grid-row-start: 4;
+         grid-row-end: span 1;
+         grid-column-start: 1;
+         grid-column-end: 3;
+         border: 2px solid black;
+         font: 3em sans-serif;
+         position: relative;
+         }
+         #TextBox {
+         grid-row-start: 4;
+         grid-row-end: span 1;
+         grid-column-start: 3;
+         grid-column-end: 4;
+         border: 2px solid black;
+         font: 3em sans-serif;
+         }
+            .player1 {
+                display: flex;
+            position: absolute;
+            bottom: 2vh;  
+         left: 31vw;
+         }
+            .player2 {
+                display: flex;
+    flex-direction: column;
+                position: absolute;
+                right: 8vw;
+         bottom: 20vh;
+         height: 20vh;
+         width: auto;
+         }
+         
+            .player3 {
+                display:flex;
+                position: absolute;
+                top: 2vh;
+         left: 31vw;
+            }
+                .player4 {
+                    display: flex;
+    flex-direction: column;
+                    position: absolute;
+                    left: 3vw;
+         bottom: 20vh;
+                }
+
+                #Player1TextBox {
+                    font-size: 22px;
+         font-style: bold;
+         border: 2px solid black;
+         padding-left: .5vw;
+         padding-right: 4vw;
+                }
+         
+    </style>
+    </head>
+    <body>
+        
+            <div id="GameLayout">
+                <div id="header">
+                    <script>
+                        window.onload = function() {
+    document.getElementById('header').innerText = "Death or Glory - " + localStorage.getItem('name');
+};
+                    </script>
+                </div>
+            <div id="TurnTracker">Turn Tracker</div>
+            <div id="PlayerStats">Player Stats
+                <div class="player1">
+                    <img class="Player1" src="images/PlayerIcon.png" alt="Player 1 Icon">
+                    <div id="Player1TextBox">
+                        Player Name:<br>
+                        Sex and Drug Amount:<br>
+                        Prestige Amount:<br>
+                        Artist Type:<br>
+                    </div>
+                </div>
+                <div class="player2">
+                    <img class="Player2" src="images/PlayerIcon.png" alt="Player 2 Icon">
+                    <div id="Player2TextBox">
+                        Player Name:<br>
+                        Sex and Drug Amount:<br>
+                        Prestige Amount:<br>
+                        Artist Type:<br>
+                    </div>
+                </div>
+                <div class="player3">
+                    <img class="Player3" src="images/PlayerIcon.png" alt="Player 3 Icon">
+                    <div id="Player3TextBox">
+                        Player Name:<br>
+                        Sex and Drug Amount:<br>
+                        Prestige Amount:<br>
+                        Artist Type:<br>
+                    </div>
+                </div>
+                <div class="player4">
+                    <img class="Player4" src="images/PlayerIcon.png" alt="Player 4 Icon">
+                    <div id="Player4TextBox">
+                        Player Name:<br>
+                        Sex and Drug Amount:<br>
+                        Prestige Amount:<br>
+                        Artist Type:<br>
+                    </div>
+                </div>
+                
+
+            </div>
+            <div id="DieRoll">Die Roll</div>
+            <div id="Timer">Timer</div>
+            <div id="Cards">Cards</div>
+            <div id="TextBox">Text Box</div>
+                    
+
+
+        </div>
+    </body>
