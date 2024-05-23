@@ -1,5 +1,6 @@
 import os
 import json
+import random
 from dataclasses import dataclass, field
 from typing import List, Dict
 
@@ -30,45 +31,52 @@ class GameState:
     def __init__(self, players):
         cards = self.load_cards()
         self.deck = self.make_era_deck(cards, 0)
+        self.shuffle_deck()
         self.players = players
         self.discard_pile = []
+        self.deal_cards()
 
-    def load_cards():
-        data_folder = os.path.join(os.path.dirname(__file__), 'data')
-        cards_file_path = os.path.join(data_folder, 'cards.json')
+    def load_cards(self):
+        base_folder = os.path.join(os.path.dirname(__file__))
+        cards_file_path = os.path.join(base_folder, 'api', 'data', 'cards.json')
 
-        with open(cards_file_path, 'r') as cards_file:
-            cards = json.load(cards_file)
+        try:
+            with open(cards_file_path, 'r') as cards_file:
+                cards = json.load(cards_file)
+        except FileNotFoundError:
+            raise FileNotFoundError("The card file was not found.")
+        except json.JSONDecodeError:
+            raise json.JSONDecodeError("Error decoding the JSON file.")
 
         return cards
     
-    def make_era_deck(cards, era):
+    def make_era_deck(self, cards, era):
         deck = []
         for card in cards:
-            deck += [card] * card['count'][era]
+            deck += [card["id"]] * card['count'][era]
         return deck
 
     def shuffle_deck(self):
-        import random
         random.shuffle(self.deck)
 
     def deal_cards(self, num_cards=5):
-        for player_id in self.players.keys():
+        for player in self.players:
             for _ in range(num_cards):
                 if self.deck:
-                    self.players[player_id].append(self.deck.pop(0))
+                    player.cards.append(self.deck.pop(0))
                 else:
                     break  # Exit if the deck runs out of cards
 
     def play_cards(self, player_id, card_index):
-        # Player plays a card from their hand to the discard pile
-        if 0 <= card_index < len(self.players[player_id]):
-            card = self.players[player_id].pop(card_index)
+        player = next((p for p in self.players if p.id == player_id), None)
+        if player and 0 <= card_index < len(player.cards):
+            card = player.cards.pop(card_index)
             self.discard_pile.append(card)
             return card
         else:
-            raise ValueError("Invalid card index")
+            raise ValueError("Invalid card index or player not found")
 
     def draw_card(self, player_id):
+        player = next((p for p in self.players if p.id == player_id), None)
         if self.deck:
-            self.players[player_id].append(self.deck.pop(0))
+            player.cards.append(self.deck.pop(0))
