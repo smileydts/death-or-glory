@@ -1,11 +1,10 @@
 from flask import Blueprint, request, jsonify, current_app
-from models import players, max_players, game_state, Player, GameState
+from models import players, max_players, Player, GameState
 
 join = Blueprint('join', __name__)
 
 @join.route('/api/join', methods=['POST'])
 def join_game():
-    global game_state
     data = request.get_json()
 
     if len(players) == max_players:
