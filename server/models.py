@@ -25,9 +25,10 @@ class Player:
             "prestige": self.prestige,
             "cards": self.cards
         }
-    
-    def add_prestige(self, amount: int):
-        self.prestige += amount
+
+    def add_score(self, attr: str, amount: int):
+        current_value = getattr(self, attr)
+        setattr(self, attr, current_value + amount)
     
 class GameState:
     def __init__(self, players):
@@ -79,21 +80,15 @@ class GameState:
                 self.discard_pile.append(card_id)
             except ValueError:
                 print("Card not found")
-        # if player and 0 <= card_index < len(player.cards):
-        #     card = player.cards.pop(card_index)
-        #     self.discard_pile.append(card)
-        #     return card
-        # else:
-        #     raise ValueError("Invalid card index or player not found")
 
     def draw_card(self, player_id):
         player = next((p for p in self.players if p.id == player_id), None)
         if self.deck:
             player.cards.append(self.deck.pop(0))
 
-    def update_prestige(self, player_id, prestige_points):
+    def update_score(self, player_id, attr, amount):
         if 0 <= player_id < len(self.players):
-            self.players[player_id].add_prestige(prestige_points)
+            self.players[player_id].add_score(attr, amount)
         else:
             raise ValueError("Invalid player ID")
         

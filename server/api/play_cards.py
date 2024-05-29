@@ -6,8 +6,10 @@ play_cards = Blueprint('play_cards', __name__)
 @play_cards.route('/api/objective', methods=['POST'])
 def objective():
     data = request.get_json()
-    all_cards = [data['objective']] + data['modifiers']
     game_state = current_app.config.get('GAME_STATE')
+
+    all_cards = [data['objective']] + data['modifiers']
+
     objective_card = get_card_info(data['objective'])
     modifier_cards = [get_card_info(m) for m in data['modifiers']]
 
@@ -15,7 +17,8 @@ def objective():
     modified_roll = roll + sum([m['die_mod'] for m in modifier_cards])
     success = modified_roll >= objective_card['min_roll']
     if success:
-        game_state.update_prestige(data['player'], objective_card['prestige'])
+        game_state.update_score(data['player'], 'prestige', objective_card['prestige'])
+    game_state.update_score(data['player'], 'sd', -1 * sum([c['cost'] for c in [objective_card] + modifier_cards]))
     game_state.play_cards(data['player'], all_cards)
     game_state.next_players_turn()
 
@@ -24,5 +27,21 @@ def objective():
             "roll": roll,
             "modified_roll": modified_roll,
             "success": success
+        }
+    )
+
+@play_cards.route('/api/cash_card', methods=['POST'])
+def cash_card():
+    data = request.get_json()
+    game_state = current_app.config.get('GAME_STATE')
+
+    full_card = get_card_info(data['card'])
+    game_state.update_score(data['player'], 'sd', full_card['value'])
+    game_state.play_cards(data['player'], [data['card']])
+    game_state.next_players_turn()
+
+    return jsonify(
+        {
+            "i": "did it"
         }
     )
