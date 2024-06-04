@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Include HTML Example</title>
+</head>
+<body>
+    <h1>Main Page</h1>
+    <div id="content"></div>
+
+    <script>
+        // This function fetches the content from content.html and inserts it into the div with id="content"
+        function loadContent() {
+            fetch('content.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('content').innerHTML = data;
+                })
+                .catch(error => {
+                    console.error('Error loading the content:', error);
+                    document.getElementById('content').innerHTML = '<p>Error loading content.</p>';
+                });
+        }
+
+        // Call the function to load the content after the page has fully loaded
+        window.addEventListener('DOMContentLoaded', loadContent);
+    </script>
+</body>
+</html>

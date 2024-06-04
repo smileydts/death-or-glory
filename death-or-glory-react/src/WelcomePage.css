@@ -1,0 +1,41 @@
+.WelcomePage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  color: rgb(0, 0, 0);
+  gap: 2vh;
+}
+
+.WelcomePage h1{
+    font-size: 4.2em;
+
+    
+}
+
+.WelcomePage input {
+    width: 300px; /* Adjust this value to increase or decrease the width */
+    height: 40px; /* Adjust this value to increase or decrease the height */
+    font-size: 16px; /* Adjust this value to increase or decrease the text size */
+    padding: 10px; /* Adjust this value to increase or decrease the padding */
+}
+
+.WelcomePage div {
+  font-size: 2em;
+}
+
+.welcomemessage {
+  font-size: 2em;
+}
+
+.JoinGame {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 4vh;
+  width: 12vh;
+  font-size: 1.5vh;
+  white-space: nowrap;
+}
