@@ -1,25 +1,13 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Game</title>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Death or Glory</title>
   </head>
   <body>
-    <audio id="audioPlayer" src="Intro.mp3" loop></audio>
-    <button id="myButton">Click me</button>
-    <div id="message"></div>
-    <script>
-      document.getElementById('myButton').onclick = function() {
-          document.getElementById('audioPlayer').play();
-          fetch('http://localhost:5000/api/hello')
-              .then(response => response.text())
-              .then(data => {
-                  document.getElementById('message').innerText = data;
-              })
-              .catch(error => console.error('Error:', error));
-      };
-    </script>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

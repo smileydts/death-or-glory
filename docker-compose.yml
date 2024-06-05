@@ -1,11 +1,15 @@
-version: '3'
 services:
-  web:
-    image: nginx:alpine
+  react:
+    build:
+      context: .
+      dockerfile: Dockerfile-react
+    # had to remove volumes to prevent node_modules from being overwritten 
+    # volumes:
+    #   - ./client:/usr/src/app
     ports:
-      - "8080:80"
-    volumes:
-      - ./client:/usr/share/nginx/html
+      - "5173:5173"
+    environment:
+      - NODE_ENV=development
   app:
     build:
       context: .
