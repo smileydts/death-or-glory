@@ -1,0 +1,29 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Set html and body to full height */
+html, body {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+#root {
+    height: 100%;
+    width: 100%;
+}
+
+.App {
+    background-image: url('/Layer1.jpg');
+    background-size: cover; /* Make the image cover the entire element */
+        height: 100vh; /* Make the element take up the entire height of the screen */
+    width: 100vw; /* Make the element take up the entire width of the screen */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Prevent the image from repeating */
+    display: flex; /* Use flexbox to ensure child elements don't affect size */
+    align-items: center; /* Center content vertically */
+    justify-content: center; /* Center content horizontally */
+}

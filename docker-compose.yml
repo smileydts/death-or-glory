@@ -1,11 +1,15 @@
-version: '3'
 services:
-  web:
-    image: nginx:alpine
-    ports:
-      - "8080:80"
+  react:
+    build:
+      context: .
+      dockerfile: Dockerfile-react
     volumes:
-      - ./client:/usr/share/nginx/html
+      - ./client:/usr/src/app
+      - react_node_modules:/usr/src/app/node_modules
+    ports:
+      - "5173:5173"
+    environment:
+      - NODE_ENV=development
   app:
     build:
       context: .
@@ -18,3 +22,7 @@ services:
       - FLASK_APP=app.py
       - FLASK_ENV=development
       - PYTHONUNBUFFERED=1
+
+volumes:
+  react_node_modules:
+    driver: local
