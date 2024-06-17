@@ -1,7 +1,46 @@
-.DefaultText {
-  font-size: 3em;
-  font-weight: bold;
-  color: rgb(0, 0, 0);
-  text-align: center;
+.gamepage {
   display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  gap: 20px;
+}
+
+.turntracker {
+  border: 2px solid #ccc;
+  padding: 20px;
+  width: 30%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.playerstats {
+  border: 2px solid #ccc;
+  padding: 20px;
+  width: 30%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.dieroll {
+  border: 2px solid #ccc;
+  padding: 20px;
+  width: 30%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.textwindow {
+  border: 2px solid #ccc;
+  padding: 20px;
+  width: 30%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.cards {
+  border: 2px solid #ccc;
+  padding: 20px;
+  width: 30%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
 }
