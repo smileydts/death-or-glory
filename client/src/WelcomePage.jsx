@@ -13,11 +13,11 @@ function WelcomePage() {
   };
 
   const handleButtonClick = () => {
-    // Set welcome message and prepare to submit
+
     setWelcomeMessage(`Welcome, ${playerName}!`);
     setIsSubmitted(true);
 
-    // Now, make the API call to register the player
+    // register the player
     fetch(`${import.meta.env.VITE_API_URL}/api/join`, {
         method: 'POST',
         headers: {
@@ -27,18 +27,17 @@ function WelcomePage() {
     })
     .then(response => response.json())
     .then(data => {
-        // Assuming the player_id is returned in the data
-        document.cookie = `player_id=${data.player_id}; path=/`; // Sets a cookie for the player_id
-        navigate('/game'); // Navigate to the game page
+        document.cookie = `player_id=${data.player_id}; path=/`;
+        navigate('/game');
     })
     .catch(error => {
         console.error('Error joining game:', error);
-        alert('Failed to join the game, please try again!'); // Simple error feedback
+        alert('Failed to join the game, please try again!');
     });
   };
 
   const handleNavigate = () => {
-    navigate('/game'); // Navigate to the new page
+    navigate('/game'); // Navigate to the new page, not sure if we still need this
   };
 
   return (
