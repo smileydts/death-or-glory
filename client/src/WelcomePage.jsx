@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import "./WelcomePage.css";
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import './WelcomePage.css';
 
 function WelcomePage() {
-  const [playerName, setPlayerName] = useState("");
-  const [welcomeMessage, setWelcomeMessage] = useState("");
+  const [playerName, setPlayerName] = useState('');
+  const [welcomeMessage, setWelcomeMessage] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
   const navigate = useNavigate();
 
@@ -38,7 +38,7 @@ function WelcomePage() {
   };
 
   const handleNavigate = () => {
-    navigate("/game"); // Navigate to the new page
+    navigate('/game'); // Navigate to the new page
   };
 
   return (
