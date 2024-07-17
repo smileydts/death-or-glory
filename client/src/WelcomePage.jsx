@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './WelcomePage.css';
+import { PlayerProvider, usePlayer } from './PlayerContext';
 
 function WelcomePage() {
+  const { setPlayerId } = usePlayer();
   const [playerName, setPlayerName] = useState('');
   const [welcomeMessage, setWelcomeMessage] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -27,7 +29,7 @@ function WelcomePage() {
     })
     .then(response => response.json())
     .then(data => {
-        document.cookie = `player_id=${data.player_id}; path=/`;
+        setPlayerId(data.player_id);
         navigate('/game');
     })
     .catch(error => {
