@@ -1,0 +1,34 @@
+.cards-container {
+    display: flex;
+    justify-content: flex-start; /* Align items to the start */
+  gap: 20px; /* Adjust the space between cards */
+  flex-wrap: wrap; /* Allow cards to wrap to the next line */
+  }
+  
+  .card {
+    width: calc(17% - 20px); /* Adjust card width based on container and gap */
+    height: 27vh;
+    background: #fff;
+    border: 2px solid #555555;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+  }
+  
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);
+    border-color: #070707;
+  }
+  
+  .card-title {
+    margin-top: 0;
+    color: #333;
+  }
+  
+  .card-content {
+    color: #666;
+  }
+
+  

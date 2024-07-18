@@ -5,12 +5,13 @@ import DieRoll from './DieRoll';
 import PlayerStats from './PlayerStats';
 import TurnTracker from './TurnTracker';
 import TextWindow from './TextWindow';
+import Timer from './Timer';
 
 
 function GameWindow () {
     return (
         <>
-        <div classname="gamepage">
+        <div className="gamepage">
              <h1>Death or Glory</h1>
                 <div className="turntracker">
                     <TurnTracker />
@@ -26,6 +27,9 @@ function GameWindow () {
                 </div>
                 <div className="dieroll">
                     <DieRoll />
+                    </div>
+                <div className="timer">
+                    <Timer />
                     </div>
         </div>
         </>
