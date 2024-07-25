@@ -1,0 +1,64 @@
+.player-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 20px;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+  }
+  
+  .stats-window {
+    border: 2px solid #555555;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    height: 100%;
+    box-sizing: border-box;
+    background: rgb(249, 242, 232);;
+  }
+  
+  .stats-window:hover {
+    
+        transform: translateY(-2px);
+        box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);
+        border-color: #070707;
+      }
+  
+  .window-3 {
+    grid-column: 2 / 3; /* Middle column */
+    grid-row: 1 / 2; /* Top row */
+    align-self: center; /* Center vertically */
+    justify-self: center; /* Center horizontally */
+  }
+
+
+  
+  .window-1 {
+    grid-column: 2 / 3; /* Middle column */
+    grid-row: 3 / 4; /* Bottom row */
+    align-self: center; /* Center vertically */
+    justify-self: center; /* Center horizontally */
+  }
+
+ 
+  
+  .window-4 {
+    grid-column: 1 / 2; /* Left column */
+    grid-row: 2 / 3; /* Middle row */
+    align-self: center; /* Center vertically */
+    justify-self: center; /* Center horizontally */
+  }
+
+  
+  .window-2 {
+    grid-column: 3 / 4; /* Right column */
+    grid-row: 2 / 3; /* Middle row */
+    align-self: center; /* Center vertically */
+    justify-self: center; /* Center horizontally */
+  }

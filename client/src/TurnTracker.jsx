@@ -1,10 +1,12 @@
 import React from 'react';
+import './TurnTracker.css'; // Import CSS file for styling
 
 const TurnTracker = () => {
   return (
     <div>
-      <p>This is the content of Turn Tracker.</p>
-    </div>
+       <div className="box1">1</div>
+        <div className="box2">2</div>
+        </div>
   );
 };
 

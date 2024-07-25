@@ -21,6 +21,10 @@
     box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);
     border-color: #070707;
   }
+
+  .card.selected {
+    border: 3px solid blue;
+  }
   
   .card-title {
     margin-top: 0;
@@ -31,4 +35,23 @@
     color: #666;
   }
 
-  
+  .buttons-container {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .play-button {
+    background-color: #981818;
+    cursor: pointer;
+  }
+
+  .cashin-button {
+    background-color: #208120;
+    cursor: pointer;
+  }
+
+  .discard-button {
+    background-color: #fefefe;
+    cursor: pointer;
+  }

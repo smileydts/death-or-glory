@@ -12,6 +12,7 @@ const Cards = () => {
   ];
 
   const [cardData, setCardData] = useState(placeholderData);
+  const [selectedCard, setSelectedCard] = useState(null);
 
   useEffect(() => {
     // Simulate data fetching here and update the state
@@ -29,18 +30,42 @@ const Cards = () => {
     // fetchData();
   }, []); // Empty dependency array means this effect runs once on mount
 
+  const handleCardClick = (index) => {
+    setSelectedCard(index);
+  };
+
+  const handleButtonClick = (action) => {
+    if (selectedCard === null) {
+      alert('No card selected');
+      return;
+    }
+
+    const card = cardData[selectedCard];
+    alert(`Would you like to ${action} "${card.title}"?`);
+  };
+
   return (
    
       <div className="cards-container">
        {cardData.map((card, index) => (
-        <div key={index} className="card">
+        <div 
+        key={index}
+        className={`card ${selectedCard === index ? 'selected' : ''}`}
+        onClick={() => handleCardClick(index)}
+        >
           <h3 className="card-title">{card.title}</h3>
           <p className="card-content">{card.content}</p>
         </div>
       ))}
-      </div>
+      
     
-   
+      <div className="buttons-container">
+      <button className="play-button" onClick={() => handleButtonClick('play')}>Play</button>
+        <button className="cashin-button" onClick={() => handleButtonClick('cash in')}>Cash In</button>
+        <button className="discard-button" onClick={() => handleButtonClick('discard')}>Discard</button>
+
+      </div>
+      </div>
   );
 };
 
