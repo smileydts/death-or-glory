@@ -5,19 +5,31 @@ const PlayerStats = () => {
   return (
     <div className="player-stats-grid">
      <div className="stats-window window-1">
-      <p>Player 1 Stats</p>
+      <h3>Player 1 Stats</h3>
+      <p>Prestige:</p>
+      <p>Sex and Drugs:</p>
+      <p>Artist Type:</p>
       {/* Add more stats here */}
       </div>
     <div className="stats-window window-2">
-      <p>Player 2 Stats</p>
+      <h3>Player 2 Stats</h3>
+      <p>Prestige:</p>
+      <p>Sex and Drugs:</p>
+      <p>Artist Type:</p>
       {/* Add more stats here */}
     </div>
     <div className="stats-window window-3">
-      <p>Player 3 Stats</p>
+      <h3>Player 3 Stats</h3>
+      <p>Prestige:</p>
+      <p>Sex and Drugs:</p>
+      <p>Artist Type:</p>
       {/* Add more stats here */}
     </div>
     <div className="stats-window window-4">
-      <p>Player 4 Stats</p>
+      <h3>Player 4 Stats</h3>
+      <p>Prestige:</p>
+      <p>Sex and Drugs:</p>
+      <p>Artist Type:</p>
       {/* Add more stats here */}
     </div>
   </div>
