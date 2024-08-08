@@ -41,7 +41,7 @@ def stream():
         old_player_count = len(players)
         while old_player_count < 4:
             current_player_count = len(players)
-            print(current_player_count)
+            print(current_player_count) # just to illustrate what's going on
             if old_player_count != current_player_count:
 
                 player_view = []
@@ -55,7 +55,7 @@ def stream():
                 yield f"data: {json.dumps(player_data)}\n\n"
                 old_player_count = current_player_count
                 
-            sleep(5)
+            sleep(1)
 
     response = Response(event_stream(), mimetype='text/event-stream')
     response.headers['Content-Security-Policy'] = "default-src 'self'; connect-src 'self' http://localhost:5000"
