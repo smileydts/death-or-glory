@@ -1,7 +1,75 @@
-.DefaultText {
-  font-size: 3em;
-  font-weight: bold;
-  color: rgb(0, 0, 0);
-  text-align: center;
-  display: flex;
+.gamepage {
+  display: grid;
+  grid-template-columns: 1fr 1fr 20vw;
+  grid-template-rows: 7vh 1fr 1fr 30vh;  
+  gap: 20px;
+  width: 100vw;
+  height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
+  }
+
+.turntracker {
+  grid-column: 2 / 4; /* First column */
+  grid-row: 1 / 2;    /* First row */
+ 
+}
+
+.playerstats {
+  grid-column: 1 / 3; /* First column */
+  grid-row: 2 / 4;    /* First row */
+
+}
+
+.dieroll {
+  grid-column: 3/4;
+  grid-row: 2/3;
+ 
+}
+
+.textwindow {
+  grid-column: 3/4;
+  grid-row: 4/5;
+  
+}
+
+.cards {
+  grid-column: 1/3;
+  grid-row: 4/5;
+  
+}
+
+.timer {
+  grid-column: 3/4;
+  grid-row: 3/4;
+  
+}
+
+.turntracker,
+.playerstats,
+.dieroll,
+.textwindow,
+.timer,
+.cards {
+  border: 3px solid #3f3f3f; /* Solid color border */
+  padding: 20px;
+  border-radius: 10px;
+   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); /* Slightly stronger shadow */
+   background: rgba(198, 179, 148, 0.6); /* Semi-transparent white background */
+  position: relative;
+  overflow: hidden; /* Ensure dynamic effects are visible */
+  transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s; /* Smooth transition for hover effects */
+}
+
+/* Hover effect to enhance dynamics */
+.turntracker:hover,
+.playerstats:hover,
+.dieroll:hover,
+.textwindow:hover,
+.timer:hover,
+.cards:hover {
+  transform: translateY(-2px); /* Slight lift effect */
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.4); /* Stronger shadow on hover */
+  border-color: #060606; /* Darker border color on hover */
+  background: rgba(198, 179, 148, 0.8); /* More transparent background on hover */
 }

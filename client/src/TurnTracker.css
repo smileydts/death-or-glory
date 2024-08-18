@@ -1,0 +1,24 @@
+
+.box1 {
+  width: 4%; /* Adjust width as needed */
+  height: 4vh; /* Adjust height as needed */
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px; /* Adjust font size as needed */
+  background-color: lightgray; /* Optional: background color */
+  box-sizing: border-box; /* Include border and padding in the element’s total width and height */
+}
+
+.box2 {
+  width: 4%; /* Adjust width as needed */
+  height: 4vh; /* Adjust height as needed */
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px; /* Adjust font size as needed */
+  background-color: white; /* Optional: background color */
+  box-sizing: border-box; /* Include border and padding in the element’s total width and height */
+}
