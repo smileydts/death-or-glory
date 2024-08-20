@@ -41,7 +41,7 @@ def stream():
         old_player_count = len(players)
         while old_player_count < 4:
             current_player_count = len(players)
-            #  uncomment out the line below if you want to see what's going on
+            #  uncomment out the line below if you want to see that it's doing something
             #  print(current_player_count)
             if old_player_count != current_player_count:
 

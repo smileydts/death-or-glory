@@ -1,38 +1,19 @@
 import React from 'react';
-import './PlayerStats.css'; // Import CSS file for styling
+import Player from './Player';  // Ensure the path is correct
+import './PlayerStats.css';
 
 const PlayerStats = () => {
+  const players = [
+    { id: 0, stats: { prestige: '', sexAndDrugs: '', artistType: '' } },
+    { id: 1, stats: { prestige: '', sexAndDrugs: '', artistType: '' } },
+    { id: 2, stats: { prestige: '', sexAndDrugs: '', artistType: '' } },
+    { id: 3, stats: { prestige: '', sexAndDrugs: '', artistType: '' } }
+  ];
+
   return (
     <div className="player-stats-grid">
-     <div className="stats-window window-1">
-      <h3>Player 1 Stats</h3>
-      <p>Prestige:</p>
-      <p>Sex and Drugs:</p>
-      <p>Artist Type:</p>
-      {/* Add more stats here */}
-      </div>
-    <div className="stats-window window-2">
-      <h3>Player 2 Stats</h3>
-      <p>Prestige:</p>
-      <p>Sex and Drugs:</p>
-      <p>Artist Type:</p>
-      {/* Add more stats here */}
+      {players.map(player => <Player key={player.id} id={player.id} stats={player.stats} />)}
     </div>
-    <div className="stats-window window-3">
-      <h3>Player 3 Stats</h3>
-      <p>Prestige:</p>
-      <p>Sex and Drugs:</p>
-      <p>Artist Type:</p>
-      {/* Add more stats here */}
-    </div>
-    <div className="stats-window window-4">
-      <h3>Player 4 Stats</h3>
-      <p>Prestige:</p>
-      <p>Sex and Drugs:</p>
-      <p>Artist Type:</p>
-      {/* Add more stats here */}
-    </div>
-  </div>
   );
 };
 
