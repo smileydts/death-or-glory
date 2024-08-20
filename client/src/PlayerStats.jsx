@@ -1,18 +1,28 @@
-import React from 'react';
-import Player from './Player';  // Ensure the path is correct
+import React, { useState, useEffect } from 'react';
+import Player from './Player';
 import './PlayerStats.css';
 
 const PlayerStats = () => {
-  const players = [
-    { id: 0, stats: { prestige: '', sexAndDrugs: '', artistType: '' } },
-    { id: 1, stats: { prestige: '', sexAndDrugs: '', artistType: '' } },
-    { id: 2, stats: { prestige: '', sexAndDrugs: '', artistType: '' } },
-    { id: 3, stats: { prestige: '', sexAndDrugs: '', artistType: '' } }
-  ];
+  const [players, setPlayers] = useState([]);
+
+  useEffect(() => {
+    const eventSource = new EventSource(`${import.meta.env.VITE_API_URL}/stream?player_id=0`);
+
+    eventSource.onmessage = function(event) {
+      const newPlayers = JSON.parse(event.data);
+      setPlayers(newPlayers);
+    };
+
+    return () => {
+      eventSource.close();
+    };
+  }, []);
 
   return (
     <div className="player-stats-grid">
-      {players.map(player => <Player key={player.id} id={player.id} stats={player.stats} />)}
+      {players.map(player => (
+        <Player key={player.id} id={player.id} stats={player} />
+      ))}
     </div>
   );
 };
