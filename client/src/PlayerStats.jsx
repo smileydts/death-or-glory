@@ -21,7 +21,7 @@ const PlayerStats = () => {
   return (
     <div className="player-stats-grid">
       {players.map(player => (
-        <Player key={player.id} id={player.id} stats={player} />
+        <Player key={player.id} id={player.id} attrs={player} />
       ))}
     </div>
   );

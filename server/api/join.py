@@ -47,10 +47,11 @@ def stream():
 
                 player_view = []
                 for p in range(max_players):
+                    id = (p + player_id) % max_players
                     try:
-                        player_view.append(players[(p + player_id) % max_players])
+                        player_view.append(players[id])
                     except IndexError:
-                        player_view.append(Player(-1, 'null'))
+                        player_view.append(Player(id, 'Waiting for player'))
                 player_data = [player.to_dict() for player in player_view]
 
                 yield f"data: {json.dumps(player_data)}\n\n"
