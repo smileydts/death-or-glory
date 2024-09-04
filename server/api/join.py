@@ -42,7 +42,7 @@ def get_players():
 
 @join.route('/api/stream_players')
 def stream():
-    # to test: paste http://localhost:5000/stream_players?player_id=0 into the browser (may have to use incognito?)
+    # to test: paste http://localhost:5000/api/stream_players?player_id=0 into the browser (may have to use incognito?)
     player_id = request.args.get('player_id', type=int)
 
     def event_stream():
@@ -64,7 +64,6 @@ def stream():
     response = Response(event_stream(), mimetype='text/event-stream')
     response.headers['Content-Security-Policy'] = "default-src 'self'; connect-src 'self' http://localhost:5000"
     return response
-#    return Response(event_stream(), mimetype='text/event-stream')
 
 @join.route('/api/reset_players', methods=['POST'])
 def reset_players():

@@ -1,4 +1,4 @@
-.player-stats-grid {
+  .player-stats-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
@@ -19,7 +19,7 @@
     align-items: center;
     justify-content: flex-start;
     width: 50%;
-    height: 100%;
+    min-height: 100%;
     box-sizing: border-box;
     background: rgb(249, 242, 232);;
     text-align: left;

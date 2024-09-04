@@ -22,6 +22,16 @@ const PlayerStats = () => {
 
       eventSource.onmessage = function(event) {
         const newPlayers = JSON.parse(event.data);
+    
+        // If there are any empty spots, it will say 'Waiting for player' in those spots
+        const allPlayersReady = newPlayers.every(player => player.name !== 'Waiting for player');
+    
+        if (allPlayersReady) {
+            // Close the EventSource if no players are waiting
+            eventSource.close();
+            console.log('All players have joined. Closing connection.');
+        }
+    
         setPlayers(newPlayers);
       };
 
