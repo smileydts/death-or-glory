@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './WelcomePage.css';
-import { PlayerProvider, usePlayer } from './PlayerContext';
+import { usePlayer } from './PlayerContext';
 
 function WelcomePage() {
   const { setPlayerId } = usePlayer();
@@ -14,7 +14,7 @@ function WelcomePage() {
     setPlayerName(event.target.value);
   };
 
-  const handleButtonClick = () => {
+  const handleJoinButtonClick = () => {
 
     setWelcomeMessage(`Welcome, ${playerName}!`);
     setIsSubmitted(true);
@@ -38,6 +38,7 @@ function WelcomePage() {
     });
   };
 
+
   const handleNavigate = () => {
     navigate('/game'); // Navigate to the new page, not sure if we still need this
   };
@@ -49,7 +50,7 @@ function WelcomePage() {
         <>
           <div>Enter Player Name</div>
           <input type="text" onChange={handleInputChange} />
-          <button onClick={handleButtonClick}>Submit</button>
+          <button onClick={handleJoinButtonClick}>Submit</button>
         </>
       ) : (
         <>
