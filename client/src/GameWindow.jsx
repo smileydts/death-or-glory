@@ -9,10 +9,12 @@ import Timer from './Timer';
 
 
 function GameWindow () {
+       // Retrieve the player's name from localStorage
+       const playerName = localStorage.getItem('playerName');
     return (
         <>
         <div className="gamepage">
-             <h1>Death or Glory</h1>
+             <h1>Death or Glory - {playerName}</h1>
                 <div className="turntracker">
                     <TurnTracker />
                 </div>

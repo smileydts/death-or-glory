@@ -13,6 +13,7 @@ function WelcomePage() {
     };
 
     const handleButtonClick = () => {
+        localStorage.setItem('playerName', playerName);
         setWelcomeMessage(`Welcome, ${playerName}!`);
         setIsSubmitted(true);
     };
