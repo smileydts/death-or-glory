@@ -1,24 +1,42 @@
-
-.box1 {
-  width: 4%; /* Adjust width as needed */
-  height: 4vh; /* Adjust height as needed */
-  border: 1px solid black;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 24px; /* Adjust font size as needed */
-  background-color: lightgray; /* Optional: background color */
-  box-sizing: border-box; /* Include border and padding in the element’s total width and height */
+.turncontainer {
+  display: flex; /* Flexbox for horizontal layout */
+  justify-content: flex-end; /* Distribute space between the boxes */
+  align-items: center; /* Center the boxes vertically */
+  width: 100%; /* Ensure the container spans the full width */
+  height: 100%; /* Ensure the container spans the full height */
+  box-sizing: border-box;
 }
 
-.box2 {
-  width: 4%; /* Adjust width as needed */
-  height: 4vh; /* Adjust height as needed */
-  border: 1px solid black;
-  display: flex;
-  justify-content: center;
+.box {
+  width: 35px; /* Set a fixed width for each box */
+  height: 35px; /* Set a fixed height for each box */
+  background-color: #ddd; /* Light gray background */
+  text-align: center; /* Center the text horizontally */
+  margin-left: 15px; /* Adds space only to the left of each box */
+  border-radius: 5px; /* Slightly rounded corners */
+  font-weight: bold; /* Bold text */
+  line-height: 30px; /* Center the text vertically */
+  box-sizing: border-box;
+}
+
+.turncontainer .box:first-child {
+  margin-left: 0;
+}
+
+.turn-label {
+  margin-right: 50px; /* Space between the label and the first box */
+  font-weight: bold; /* Bold text for the label */
+  font-size: 30px; /* Adjust font size as needed */
+  color: #333; /* Adjust color as needed */
   align-items: center;
-  font-size: 24px; /* Adjust font size as needed */
-  background-color: white; /* Optional: background color */
-  box-sizing: border-box; /* Include border and padding in the element’s total width and height */
+}
+
+/* Add extra spacing between boxes 3 and 4 */
+.turncontainer .box:nth-child(4) {
+  margin-right: 40px; /* Increase space on the right side */
+}
+
+/* Add extra spacing between boxes 6 and 7 */
+.turncontainer .box:nth-child(7) {
+  margin-right: 40px; /* Increase space on the right side */
 }

@@ -15,7 +15,7 @@ function WelcomePage() {
   };
 
   const handleJoinButtonClick = () => {
-
+    localStorage.setItem('playerName', playerName);
     setWelcomeMessage(`Welcome, ${playerName}!`);
     setIsSubmitted(true);
 

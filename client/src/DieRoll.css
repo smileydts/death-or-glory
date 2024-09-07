@@ -1,0 +1,36 @@
+.dice-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .dice-image {
+    width: 80px;
+    height: 80px;
+    margin: 0 5px;
+  }
+  
+  .shuffle {
+    animation: shuffle 1s ease-in-out;
+  }
+  
+  @keyframes shuffle {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+  }
+
+  .centercontainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .button-container {
+    margin-top: 5px;
+  }
+  
+  .dicetotal {
+    margin: 5px 0;
+    font-size: 25px;
+  }
