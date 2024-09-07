@@ -1,0 +1,32 @@
+
+.container {
+    padding: .5vh;
+    max-width: 400px;
+    margin: 0 auto;
+    text-align: center;
+    box-sizing: border-box;
+  }
+  
+  .message-window {
+    border: 1px solid #ccc;
+    padding: .5vh;
+    height: 18vh;
+    margin-bottom: 20px;
+    background-color: #f9f9f9;
+    text-align: left;
+    overflow-y: auto;
+    box-sizing: border-box;
+    margin-top: 0; /* Ensures there's no top margin */
+  }
+  
+  .message-window p {
+    margin: 5px 0;
+  }
+  
+  .input-field {
+    width: 100%;
+    padding: 1vh;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+  }
