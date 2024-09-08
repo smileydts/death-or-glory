@@ -205,8 +205,11 @@
 		},
 		{
 			"name": "get players",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
-				"method": "POST",
+				"method": "GET",
 				"header": [],
 				"body": {
 					"mode": "raw",
@@ -218,7 +221,7 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:5000/api/get_players",
+					"raw": "localhost:5000/api/get_players?player_id=0",
 					"host": [
 						"localhost"
 					],
@@ -226,6 +229,12 @@
 					"path": [
 						"api",
 						"get_players"
+					],
+					"query": [
+						{
+							"key": "player_id",
+							"value": "0"
+						}
 					]
 				}
 			},

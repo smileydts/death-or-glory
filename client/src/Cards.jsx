@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './Cards.css'; // Import CSS file for styling
+import './Cards.css';
 
 const Cards = () => {
   // Placeholder data for cards
@@ -17,15 +17,15 @@ const Cards = () => {
   useEffect(() => {
     // Simulate data fetching here and update the state
     // In the future, replace this with actual API call
-    // const fetchData = async () => {
-    //   try {
-    //     const response = await fetch('https://your-api-endpoint.com/cards'); // Replace with your API endpoint
-    //     const data = await response.json();
-    //     setCardData(data);
-    //   } catch (error) {
-    //     console.error('Error fetching card data:', error);
-    //   }
-    // };
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/game_state`);
+        const data = await response.json();
+        setCardData(data);
+      } catch (error) {
+        console.error('Error fetching card data:', error);
+      }
+    };
 
     // fetchData();
   }, []); // Empty dependency array means this effect runs once on mount
