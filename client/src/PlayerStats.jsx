@@ -5,7 +5,7 @@ import './PlayerStats.css';
 
 const PlayerStats = () => {
   const [players, setPlayers] = useState([]);  
-  const { playerId } = usePlayer();
+  const { playerId, allPlayersReady, setAllPlayersReady } = usePlayer();
 
   useEffect(() => {
     if (playerId !== null && playerId !== undefined) {
@@ -24,10 +24,10 @@ const PlayerStats = () => {
         const newPlayers = JSON.parse(event.data);
     
         // If there are any empty spots, it will say 'Waiting for player' in those spots
-        const allPlayersReady = newPlayers.every(player => player.name !== 'Waiting for player');
+        const isAllPlayersReady = newPlayers.every(player => player.name !== 'Waiting for player');
+        setAllPlayersReady(isAllPlayersReady);
     
-        if (allPlayersReady) {
-            // Close the EventSource if no players are waiting
+        if (isAllPlayersReady) {
             eventSource.close();
             console.log('All players have joined. Closing connection.');
         }
@@ -39,7 +39,7 @@ const PlayerStats = () => {
         eventSource.close();
       };
     }
-  }, [playerId]);
+  }, [playerId, setAllPlayersReady]);
 
   return (
     <div className="player-stats-grid">

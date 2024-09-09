@@ -1,48 +1,48 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import './Cards.css';
+import { usePlayer } from './PlayerContext';
 
 const Cards = () => {
-  // Placeholder data for cards
-  const placeholderData = [
-    { title: 'Card 1', content: 'This is the content of Card 1.' },
-    { title: 'Card 2', content: 'This is the content of Card 2.' },
-    { title: 'Card 3', content: 'This is the content of Card 3.' },
-    { title: 'Card 4', content: 'This is the content of Card 4.' },
-    { title: 'Card 5', content: 'This is the content of Card 5.' }
-  ];
-
-  const [cardData, setCardData] = useState(placeholderData);
+  const { playerId, allPlayersReady } = usePlayer();
+  const [cardData, setCardData] = useState([]);
   const [selectedCard, setSelectedCard] = useState(null);
 
   useEffect(() => {
-    // Simulate data fetching here and update the state
-    // In the future, replace this with actual API call
-    const fetchData = async () => {
-      try {
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/game_state`);
-        const data = await response.json();
-        setCardData(data);
-      } catch (error) {
-        console.error('Error fetching card data:', error);
-      }
-    };
+    if(allPlayersReady) {
+      const fetchData = async () => {
+        try {
+          const response = await fetch(`${import.meta.env.VITE_API_URL}/api/game_state?player_id=${playerId}`);
+          const data = await response.json();
+          const player = data.players.find(p => p.id === playerId);
+          const playerCards = player ? player.cards : [];
+          setCardData(playerCards);
+          console.log(data)
+        } catch (error) {
+          console.error('Error fetching card data:', error);
+        }
+      };
 
-    // fetchData();
-  }, []); // Empty dependency array means this effect runs once on mount
+      fetchData();
+    }
+  }, [allPlayersReady]);
 
   const handleCardClick = (index) => {
     setSelectedCard(index);
   };
 
-  const handleButtonClick = (action) => {
-    if (selectedCard === null) {
-      alert('No card selected');
-      return;
-    }
+  // const handleButtonClick = (action) => {
+  //   if (selectedCard === null) {
+  //     alert('No card selected');
+  //     return;
+  //   }
 
-    const card = cardData[selectedCard];
-    alert(`Would you like to ${action} "${card.title}"?`);
-  };
+  //   const card = cardData[selectedCard];
+  //   alert(`Would you like to ${action} "${card}"?`);
+  // };
+
+  if (!allPlayersReady || !cardData.length) {
+    return <div>Loading cards or waiting for players...</div>; // Display a loading message or spinner
+  }
 
   return (
    
@@ -53,8 +53,8 @@ const Cards = () => {
         className={`card ${selectedCard === index ? 'selected' : ''}`}
         onClick={() => handleCardClick(index)}
         >
-          <h3 className="card-title">{card.title}</h3>
-          <p className="card-content">{card.content}</p>
+          <h3 className="card-title">Yo</h3>
+          <p className="card-content">{card}</p>
         </div>
       ))}
       
