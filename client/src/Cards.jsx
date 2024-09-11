@@ -39,18 +39,29 @@ const Cards = () => {
       alert('No card selected');
       return;
     }
-
     const card = cardData[selectedCard];
-    alert(`Would you like to ${action} "${card.title}"?`);
+    const userConfirmed = window.confirm(`Would you like to ${action} "${card.title}"?`);
+
+    if (userConfirmed) {
+      // Instead of removing the card, hide it
+      const updatedCards = cardData.map((card, index) =>
+        index === selectedCard ? { ...card, hidden: true } : card
+      );
+      setCardData(updatedCards);
+      setSelectedCard(null);
+    }
   };
+
+  
 
   return (
    
+    <div className="cards-wrapper">
       <div className="cards-container">
        {cardData.map((card, index) => (
         <div 
         key={index}
-        className={`card ${selectedCard === index ? 'selected' : ''}`}
+        className={`card ${selectedCard === index ? 'selected' : ''} ${card.hidden ? 'hidden' : ''}`}
         onClick={() => handleCardClick(index)}
         >
           <h3 className="card-title">{card.title}</h3>
@@ -58,14 +69,17 @@ const Cards = () => {
         </div>
       ))}
       
-    
+       
+      
+      </div>
       <div className="buttons-container">
       <button className="play-button" onClick={() => handleButtonClick('play')}>Play</button>
         <button className="cashin-button" onClick={() => handleButtonClick('cash in')}>Cash In</button>
         <button className="discard-button" onClick={() => handleButtonClick('discard')}>Discard</button>
 
+      
       </div>
-      </div>
+    </div>
   );
 };
 
