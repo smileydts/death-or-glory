@@ -1,38 +1,52 @@
-import React from 'react';
-import './PlayerStats.css'; // Import CSS file for styling
+import React, { useState, useEffect } from 'react';
+import Player from './Player';
+import { usePlayer } from './PlayerContext';
+import './PlayerStats.css';
 
 const PlayerStats = () => {
+  const [players, setPlayers] = useState([]);  
+  const { playerId } = usePlayer();
+
+  useEffect(() => {
+    if (playerId !== null && playerId !== undefined) {
+
+      const fetchInitialData = async () => {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/get_players?player_id=${playerId}`);
+        const initialPlayers = await response.json();
+        setPlayers(initialPlayers);
+      };
+
+      fetchInitialData();
+      
+      const eventSource = new EventSource(`${import.meta.env.VITE_API_URL}/api/stream_players?player_id=${playerId}`);
+
+      eventSource.onmessage = function(event) {
+        const newPlayers = JSON.parse(event.data);
+    
+        // If there are any empty spots, it will say 'Waiting for player' in those spots
+        const allPlayersReady = newPlayers.every(player => player.name !== 'Waiting for player');
+    
+        if (allPlayersReady) {
+            // Close the EventSource if no players are waiting
+            eventSource.close();
+            console.log('All players have joined. Closing connection.');
+        }
+    
+        setPlayers(newPlayers);
+      };
+
+      return () => {
+        eventSource.close();
+      };
+    }
+  }, [playerId]);
+
   return (
     <div className="player-stats-grid">
-     <div className="stats-window window-1">
-      <h3>Player 1 Stats</h3>
-      <p>Prestige:</p>
-      <p>Sex and Drugs:</p>
-      <p>Artist Type:</p>
-      {/* Add more stats here */}
-      </div>
-    <div className="stats-window window-2">
-      <h3>Player 2 Stats</h3>
-      <p>Prestige:</p>
-      <p>Sex and Drugs:</p>
-      <p>Artist Type:</p>
-      {/* Add more stats here */}
+      {players.map(player => (
+        <Player key={player.id} id={player.id} attrs={player} />
+      ))}
     </div>
-    <div className="stats-window window-3">
-      <h3>Player 3 Stats</h3>
-      <p>Prestige:</p>
-      <p>Sex and Drugs:</p>
-      <p>Artist Type:</p>
-      {/* Add more stats here */}
-    </div>
-    <div className="stats-window window-4">
-      <h3>Player 4 Stats</h3>
-      <p>Prestige:</p>
-      <p>Sex and Drugs:</p>
-      <p>Artist Type:</p>
-      {/* Add more stats here */}
-    </div>
-  </div>
   );
 };
 
