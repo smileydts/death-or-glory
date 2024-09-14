@@ -53,8 +53,8 @@ const Cards = () => {
         className={`card ${selectedCard === index ? 'selected' : ''}`}
         onClick={() => handleCardClick(index)}
         >
-          <h3 className="card-title">Yo</h3>
-          <p className="card-content">{card}</p>
+          <h3 className="card-title">{card.text.display}</h3>
+          <p className="card-content">{card.text.hover}</p>
         </div>
       ))}
       

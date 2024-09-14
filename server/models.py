@@ -57,7 +57,7 @@ class GameState:
     def make_era_deck(self, cards, era):
         deck = []
         for card in cards:
-            deck += [card["id"]] * card['count'][era]
+            deck += [card] * card['count'][era]
         return deck
 
     def shuffle_deck(self):
