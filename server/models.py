@@ -1,6 +1,7 @@
 import os
 import json
 import random
+import re
 from dataclasses import dataclass, field
 from typing import List, Dict
 
@@ -56,8 +57,19 @@ class GameState:
     
     def make_era_deck(self, cards, era):
         deck = []
+        pattern = r'#(.*?)#'
+
         for card in cards:
-            deck += [card] * card['count'][era]
+            card_substituted = card
+            for key in ["display", "hover"]:
+                def replace_match(match):
+                    key = match.group(1)
+                    try:
+                        return str(card[key])
+                    except IndexError:
+                        return "William the Conqueror conquered England in 1066"
+                card_substituted["text"][key] = re.sub(pattern, replace_match, card["text"][key])
+            deck += [card_substituted] * card['count'][era]
         return deck
 
     def shuffle_deck(self):
