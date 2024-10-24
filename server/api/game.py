@@ -1,21 +1,27 @@
-from flask import Blueprint, jsonify, current_app
+from flask import Blueprint, request, jsonify, current_app
 from models import players, max_players, GameState
 
 game = Blueprint('game', __name__)
 
 @game.route('/api/game_state', methods=['GET'])
 def get_game_state():
+    player_id = request.args.get('player_id', type=int)
     game_state = current_app.config.get('GAME_STATE')
     if game_state is None:
         return jsonify({"error": "Game not initialized"}), 404
 
-    # Serialize the game state to JSON
+    # Serialize the information needed from the game state to JSON
     state = {
-        "deck": game_state.deck,
-        "discard_pile": game_state.discard_pile,
+        "deck": len(game_state.deck),
+        "discard_pile": len(game_state.discard_pile),
         "players": [player.to_dict() for player in game_state.players],
         "turn": game_state.turn
     }
+    for p in range(len(game_state.players)):
+        state["players"][p]["num_cards"] = len(state["players"][p]["cards"])
+        if state["players"][p]["id"] != player_id:
+              # don't tell cards except for the requester
+            state["players"][p]["cards"] = []
     return jsonify(state)
 
 @game.route('/api/reset_game', methods=['GET'])
