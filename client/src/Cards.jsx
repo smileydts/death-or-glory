@@ -76,6 +76,7 @@ const Cards = () => {
         onClick={() => handleCardClick(index)}
         >
           <h3 className="card-title">{card.text.display}</h3>
+          <p className="card-content">Cash-in value: {card.value}</p>
           <p className="card-content">{card.text.hover}</p>
         </div>
       ))}
