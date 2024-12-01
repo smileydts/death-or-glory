@@ -3,7 +3,7 @@ import './Cards.css';
 import { usePlayer } from './PlayerContext';
 
 const Cards = () => {
-  const { playerId, allPlayersReady } = usePlayer();
+  const { playerId, allPlayersReady, activePlayer, setActivePlayer } = usePlayer();
   const [cardData, setCardData] = useState([]);
   const [selectedCards, setSelectedCards] = useState([]);
 
@@ -12,11 +12,12 @@ const Cards = () => {
       const fetchData = async () => {
         try {
           const response = await fetch(`${import.meta.env.VITE_API_URL}/api/game_state?player_id=${playerId}`);
-          const data = await response.json();
-          const player = data.players.find(p => p.id === playerId);
+          const gameState = await response.json();
+          const player = gameState.players.find(p => p.id === playerId);
           const playerCards = player ? player.cards : [];
           setCardData(playerCards);
-          console.log(data)
+          setActivePlayer(gameState.turn)
+          console.log(gameState)
         } catch (error) {
           console.error('Error fetching card data:', error);
         }
@@ -44,16 +45,18 @@ const Cards = () => {
     } else {
       const currentSelectionIds = selectedCards.map(i => cardData[i].id);
       let isSelectable = false;
-      if (selectedCards.length === 0) {
-        isSelectable = true;
-      } else {
-        const hasRecord = currentSelectionIds.some(id => /^record_\d$/.test(id));
-        const hasTour = currentSelectionIds.some(id => /^tour_\d$/.test(id));
-  
-        if (hasRecord) {
-          isSelectable = currentCardId.includes('record') || currentCardId.includes('record_modifier');
-        } else if (hasTour) {
-          isSelectable = currentCardId.includes('tour') || currentCardId.includes('tour_modifier');
+      if (playerId === activePlayer) {
+        if (selectedCards.length === 0) {
+          isSelectable = true;
+        } else {
+          const hasRecord = currentSelectionIds.some(id => /^record_\d$/.test(id));
+          const hasTour = currentSelectionIds.some(id => /^tour_\d$/.test(id));
+    
+          if (hasRecord) {
+            isSelectable = currentCardId.includes('record') || currentCardId.includes('record_modifier');
+          } else if (hasTour) {
+            isSelectable = currentCardId.includes('tour') || currentCardId.includes('tour_modifier');
+          }
         }
       }
   
