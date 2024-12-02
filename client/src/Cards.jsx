@@ -6,6 +6,7 @@ const Cards = () => {
   const { playerId, allPlayersReady, activePlayer, setActivePlayer } = usePlayer();
   const [cardData, setCardData] = useState([]);
   const [selectedCards, setSelectedCards] = useState([]);
+  const isButtonEnabled = selectedCards.length === 1;
 
   useEffect(() => {
     if(allPlayersReady) {
@@ -85,7 +86,7 @@ const Cards = () => {
       ))}
         <div className="buttons-container">
           <button className="play-button" onClick={() => handleButtonClick('play')}>Play</button>
-          <button className="cashin-button" onClick={() => handleButtonClick('cash in')}>Cash In</button>
+          <button className="cashin-button" onClick={() => handleButtonClick('cash in')} disabled={!isButtonEnabled}>Cash In</button>
           <button className="discard-button" onClick={() => handleButtonClick('discard')}>Discard</button>
         </div>
       </div>

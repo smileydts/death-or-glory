@@ -39,6 +39,7 @@ def cash_card():
     game_state.update_score(data['player'], 'sd', full_card['value'])
     game_state.play_cards(data['player'], [data['card']])
     game_state.next_players_turn()
+    game_state.last_play_text = f"{data['player']} cashed in {data['card']} for {full_card['value']} sex and drugs"
 
     return jsonify(
         {

@@ -42,6 +42,7 @@ class GameState:
         self.turn = random.randint(0, 3)
         self.discard_pile = []
         self.deal_cards()
+        self.last_play_text = ""
 
     def load_cards(self):
 
