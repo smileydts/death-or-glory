@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react';
 import './Cards.css';
 import { usePlayer } from './PlayerContext';
+import { useGameState } from './GameStateContext';
 
 const Cards = () => {
   const { playerId, allPlayersReady, activePlayer, setActivePlayer } = usePlayer();
+  const { gameState, setGameState, updateGameState  } = useGameState();
   const [cardData, setCardData] = useState([]);
   const [selectedCards, setSelectedCards] = useState([]);
   const isButtonEnabled = selectedCards.length === 1;
@@ -67,6 +69,11 @@ const Cards = () => {
     }
   };
 
+  const handleCashButtonClick = () => {
+    handleGameAction('cash', playerId, selectedCards[0], updateGameState);
+    console.log(gameState)
+  };
+
   if (!allPlayersReady || !cardData.length) {
     return <div>Loading cards or waiting for players...</div>; // Display a loading message or spinner
   }
@@ -86,7 +93,7 @@ const Cards = () => {
       ))}
         <div className="buttons-container">
           <button className="play-button" onClick={() => handleButtonClick('play')}>Play</button>
-          <button className="cashin-button" onClick={() => handleButtonClick('cash in')} disabled={!isButtonEnabled}>Cash In</button>
+          <button className="cashin-button" onClick={() => handleCashButtonClick()} disabled={!isButtonEnabled}>Cash In</button>
           <button className="discard-button" onClick={() => handleButtonClick('discard')}>Discard</button>
         </div>
       </div>

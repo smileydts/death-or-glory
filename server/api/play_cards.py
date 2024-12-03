@@ -41,8 +41,4 @@ def cash_card():
     game_state.next_players_turn()
     game_state.last_play_text = f"{data['player']} cashed in {data['card']} for {full_card['value']} sex and drugs"
 
-    return jsonify(
-        {
-            "i": "did it"
-        }
-    )
+    return jsonify(game_state.to_dict()), 200

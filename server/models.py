@@ -44,6 +44,13 @@ class GameState:
         self.deal_cards()
         self.last_play_text = ""
 
+    def to_dict(self):
+        return {
+            'players': self.players,
+            'turn': self.turn,
+            'last_play_text': self.last_play_text
+        }
+
     def load_cards(self):
 
         try:
