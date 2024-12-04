@@ -2,10 +2,11 @@ import React, { useState, useEffect, useContext } from 'react';
 import './Cards.css';
 import { usePlayer } from './PlayerContext';
 import { useGameState } from './GameStateContext';
+import { handleGameAction } from './gameService';
 
 const Cards = () => {
   const { playerId, allPlayersReady, activePlayer, setActivePlayer } = usePlayer();
-  const { gameState, setGameState, updateGameState  } = useGameState();
+  const { gameState, updateGameState } = useGameState();
   const [cardData, setCardData] = useState([]);
   const [selectedCards, setSelectedCards] = useState([]);
   const isButtonEnabled = selectedCards.length === 1;
@@ -70,8 +71,8 @@ const Cards = () => {
   };
 
   const handleCashButtonClick = () => {
-    handleGameAction('cash', playerId, selectedCards[0], updateGameState);
-    console.log(gameState)
+    handleGameAction('cash', playerId, cardData[selectedCards[0]].id, updateGameState);
+    console.log(gameState.last_play_text)
   };
 
   if (!allPlayersReady || !cardData.length) {

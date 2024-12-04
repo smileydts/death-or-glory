@@ -39,7 +39,8 @@ class GameState:
         self.deck = self.make_era_deck(cards, 0)
         self.shuffle_deck()
         self.players = players
-        self.turn = random.randint(0, 3)
+        self.turn = 0 # temp
+        # self.turn = random.randint(0, 3)
         self.discard_pile = []
         self.deal_cards()
         self.last_play_text = ""
@@ -91,15 +92,16 @@ class GameState:
                 else:
                     break  # Exit if the deck runs out of cards
 
-    def play_cards(self, player_id, card_ids):
+    def move_cards_to_discard(self, player_id, card_ids):
         player = next((p for p in self.players if p.id == player_id), None)
         for card_id in card_ids:
-            try:
-                card_index = player.cards.index(card_id)
-                player.cards.pop(card_index)
-                self.discard_pile.append(card_id)
-            except ValueError:
-                print("Card not found")
+            for i, card in enumerate(player.cards):
+                if card['id'] == card_id:
+                    removed_card = player.cards.pop(i)
+                    self.discard_pile.append(removed_card)
+                    break
+            else:
+                print(f"Card {card_id} not found in player {player_id}'s hand.")
 
     def draw_card(self, player_id):
         player = next((p for p in self.players if p.id == player_id), None)

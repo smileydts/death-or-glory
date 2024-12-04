@@ -19,7 +19,7 @@ def objective():
     if success:
         game_state.update_score(data['player'], 'prestige', objective_card['prestige'])
     game_state.update_score(data['player'], 'sd', -1 * sum([c['cost'] for c in [objective_card] + modifier_cards]))
-    game_state.play_cards(data['player'], all_cards)
+    game_state.move_cards_to_discard(data['player'], all_cards)
     game_state.next_players_turn()
 
     return jsonify(
@@ -37,7 +37,7 @@ def cash_card():
 
     full_card = get_card_info(data['card'])
     game_state.update_score(data['player'], 'sd', full_card['value'])
-    game_state.play_cards(data['player'], [data['card']])
+    game_state.move_cards_to_discard(data['player'], [data['card']])
     game_state.next_players_turn()
     game_state.last_play_text = f"{data['player']} cashed in {data['card']} for {full_card['value']} sex and drugs"
 
