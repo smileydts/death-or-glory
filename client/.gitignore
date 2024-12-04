@@ -10,7 +10,7 @@ lerna-debug.log*
 node_modules
 dist
 dist-ssr
-*.local
+# *.local   # re-add .local files if info therein ever depends on the machine, or is secure
 
 # Editor directories and files
 .vscode/*
