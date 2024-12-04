@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Modal from './Modal'; // Import the Modal component
 import './Cards.css'; // Import CSS file for styling
 
 const Cards = () => {
@@ -13,6 +14,8 @@ const Cards = () => {
 
   const [cardData, setCardData] = useState(placeholderData);
   const [selectedCard, setSelectedCard] = useState(null);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [modalAction, setModalAction] = useState('');
 
   useEffect(() => {
     // Simulate data fetching here and update the state
@@ -34,22 +37,26 @@ const Cards = () => {
     setSelectedCard(index);
   };
 
-  const handleButtonClick = (action) => {
+  const openModal = (action) => {
     if (selectedCard === null) {
       alert('No card selected');
       return;
     }
-    const card = cardData[selectedCard];
-    const userConfirmed = window.confirm(`Would you like to ${action} "${card.title}"?`);
+    setModalAction(action); // Set the current action (Play, Cash In, Discard)
+    setModalVisible(true);  // Show the modal
+  };
 
-    if (userConfirmed) {
-      // Instead of removing the card, hide it
-      const updatedCards = cardData.map((card, index) =>
-        index === selectedCard ? { ...card, hidden: true } : card
-      );
-      setCardData(updatedCards);
-      setSelectedCard(null);
-    }
+  const handleModalConfirm = () => {
+    const updatedCards = cardData.map((card, index) =>
+      index === selectedCard ? { ...card, hidden: true } : card
+    );
+    setCardData(updatedCards);
+    setSelectedCard(null);
+    setModalVisible(false); // Close the modal
+  };
+
+  const handleModalCancel = () => {
+    setModalVisible(false); // Close the modal without making any changes
   };
 
   
@@ -73,12 +80,23 @@ const Cards = () => {
       
       </div>
       <div className="buttons-container">
-      <button className="play-button" onClick={() => handleButtonClick('play')}>Play</button>
-        <button className="cashin-button" onClick={() => handleButtonClick('cash in')}>Cash In</button>
-        <button className="discard-button" onClick={() => handleButtonClick('discard')}>Discard</button>
+      <button className="play-button" onClick={() => openModal('play')}>Play</button>
+        <button className="cashin-button" onClick={() => openModal('cash in')}>Cash In</button>
+        <button className="discard-button" onClick={() => openModal('discard')}>Discard</button>
 
       
       </div>
+
+    {/* Only render Modal when modalVisible is true */}
+    {modalVisible && (
+        <Modal
+          isVisible={modalVisible}
+          title="Confirm Action"
+          message={`Would you like to ${modalAction} this card?`}
+          onConfirm={handleModalConfirm}
+          onCancel={handleModalCancel}
+        />
+      )}
     </div>
   );
 };
