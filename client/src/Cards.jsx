@@ -16,12 +16,12 @@ const Cards = () => {
       const fetchData = async () => {
         try {
           const response = await fetch(`${import.meta.env.VITE_API_URL}/api/game_state?player_id=${playerId}`);
-          const gameState = await response.json();
-          const player = gameState.players.find(p => p.id === playerId);
+          const data = await response.json();
+          updateGameState(data);
+          const player = data.players.find(p => p.id === playerId);
           const playerCards = player ? player.cards : [];
           setCardData(playerCards);
-          setActivePlayer(gameState.turn)
-          console.log(gameState)
+          setActivePlayer(data.turn)
         } catch (error) {
           console.error('Error fetching card data:', error);
         }
@@ -72,7 +72,8 @@ const Cards = () => {
 
   const handleCashButtonClick = () => {
     handleGameAction('cash', playerId, cardData[selectedCards[0]].id, updateGameState);
-    console.log(gameState.last_play_text)
+    // console.log(gameState)
+    // need useEffect here and elsewhere to ensure synchronous update of gameState
   };
 
   if (!allPlayersReady || !cardData.length) {
