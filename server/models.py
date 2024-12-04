@@ -1,6 +1,7 @@
 import os
 import json
 import random
+import re
 from dataclasses import dataclass, field
 from typing import List, Dict
 
@@ -38,9 +39,18 @@ class GameState:
         self.deck = self.make_era_deck(cards, 0)
         self.shuffle_deck()
         self.players = players
-        self.turn = random.randint(0, 3)
+        self.turn = 0 # temp
+        # self.turn = random.randint(0, 3)
         self.discard_pile = []
         self.deal_cards()
+        self.last_play_text = ""
+
+    def to_dict(self):
+        return {
+            'players': self.players,
+            'turn': self.turn,
+            'last_play_text': self.last_play_text
+        }
 
     def load_cards(self):
 
@@ -56,8 +66,19 @@ class GameState:
     
     def make_era_deck(self, cards, era):
         deck = []
+        pattern = r'#(.*?)#'
+
         for card in cards:
-            deck += [card["id"]] * card['count'][era]
+            card_substituted = card
+            for key in ["display", "hover"]:
+                def replace_match(match):
+                    key = match.group(1)
+                    try:
+                        return str(card[key])
+                    except IndexError:
+                        return "William the Conqueror conquered England in 1066"
+                card_substituted["text"][key] = re.sub(pattern, replace_match, card["text"][key])
+            deck += [card_substituted] * card['count'][era]
         return deck
 
     def shuffle_deck(self):
@@ -71,15 +92,16 @@ class GameState:
                 else:
                     break  # Exit if the deck runs out of cards
 
-    def play_cards(self, player_id, card_ids):
+    def move_cards_to_discard(self, player_id, card_ids):
         player = next((p for p in self.players if p.id == player_id), None)
         for card_id in card_ids:
-            try:
-                card_index = player.cards.index(card_id)
-                player.cards.pop(card_index)
-                self.discard_pile.append(card_id)
-            except ValueError:
-                print("Card not found")
+            for i, card in enumerate(player.cards):
+                if card['id'] == card_id:
+                    removed_card = player.cards.pop(i)
+                    self.discard_pile.append(removed_card)
+                    break
+            else:
+                print(f"Card {card_id} not found in player {player_id}'s hand.")
 
     def draw_card(self, player_id):
         player = next((p for p in self.players if p.id == player_id), None)

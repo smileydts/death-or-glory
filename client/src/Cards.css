@@ -75,6 +75,12 @@
   color: white;
 }
 
+.cashin-button:disabled {
+  background-color: #ccc;  /* Grey out the button */
+  color: #666;  /* Dim the text color */
+  cursor: not-allowed;  /* Change cursor to indicate non-interactivity */
+}
+
 .play-button {
   background-color: #981818;
 }

@@ -1,44 +1,41 @@
-import React, { useState, useEffect } from 'react';
-import Modal from './Modal'; // Import the Modal component
-import './Cards.css'; // Import CSS file for styling
+import React, { useState, useEffect, useContext } from 'react';
+import './Cards.css';
+import { usePlayer } from './PlayerContext';
+import { useGameState } from './GameStateContext';
+import { handleGameAction } from './gameService';
+import Modal from './Modal';
 
 const Cards = () => {
-  // Placeholder data for cards
-  const placeholderData = [
-    { title: 'Card 1', content: 'This is the content of Card 1.' },
-    { title: 'Card 2', content: 'This is the content of Card 2.' },
-    { title: 'Card 3', content: 'This is the content of Card 3.' },
-    { title: 'Card 4', content: 'This is the content of Card 4.' },
-    { title: 'Card 5', content: 'This is the content of Card 5.' }
-  ];
-
-  const [cardData, setCardData] = useState(placeholderData);
-  const [selectedCard, setSelectedCard] = useState(null);
+  const { playerId, allPlayersReady, activePlayer, setActivePlayer } = usePlayer();
+  const { gameState, updateGameState } = useGameState();
+  const [cardData, setCardData] = useState([]);
+  const [selectedCards, setSelectedCards] = useState([]);
+  const isButtonEnabled = selectedCards.length === 1;
   const [modalVisible, setModalVisible] = useState(false);
   const [modalAction, setModalAction] = useState('');
 
   useEffect(() => {
-    // Simulate data fetching here and update the state
-    // In the future, replace this with actual API call
-    // const fetchData = async () => {
-    //   try {
-    //     const response = await fetch('https://your-api-endpoint.com/cards'); // Replace with your API endpoint
-    //     const data = await response.json();
-    //     setCardData(data);
-    //   } catch (error) {
-    //     console.error('Error fetching card data:', error);
-    //   }
-    // };
+    if(allPlayersReady) {
+      const fetchData = async () => {
+        try {
+          const response = await fetch(`${import.meta.env.VITE_API_URL}/api/game_state?player_id=${playerId}`);
+          const data = await response.json();
+          updateGameState(data);
+          const player = data.players.find(p => p.id === playerId);
+          const playerCards = player ? player.cards : [];
+          setCardData(playerCards);
+          setActivePlayer(data.turn)
+        } catch (error) {
+          console.error('Error fetching card data:', error);
+        }
+      };
 
-    // fetchData();
-  }, []); // Empty dependency array means this effect runs once on mount
-
-  const handleCardClick = (index) => {
-    setSelectedCard(index);
-  };
+      fetchData();
+    }
+  }, [allPlayersReady]);
 
   const openModal = (action) => {
-    if (selectedCard === null) {
+    if (selectedCards.length === 0) {
       alert('No card selected');
       return;
     }
@@ -47,41 +44,90 @@ const Cards = () => {
   };
 
   const handleModalConfirm = () => {
-    const updatedCards = cardData.map((card, index) =>
-      index === selectedCard ? { ...card, hidden: true } : card
-    );
-    setCardData(updatedCards);
-    setSelectedCard(null);
-    setModalVisible(false); // Close the modal
-  };
+    setModalVisible(false); 
+  }
+  // const handleModalConfirm = () => {
+  //   const updatedCards = cardData.map((card, index) =>
+  //     index === selectedCard ? { ...card, hidden: true } : card
+  //   );
+  //   setCardData(updatedCards);
+  //   setSelectedCard(null);
+  //   setModalVisible(false); // Close the modal
+  // };
 
   const handleModalCancel = () => {
     setModalVisible(false); // Close the modal without making any changes
   };
 
+  const handleCardClick = (index) => {
+    const isSelected = selectedCards.includes(index);
+    const currentCardId = cardData[index].id;
   
+    if (isSelected) {
+      if (selectedCards.length === 1) {
+        // Rule 1: Deselect the card if it's the only one selected
+        setSelectedCards([]);
+      } else if (currentCardId.includes('modifier')) {
+        // Rule 2: Deselect only this card if it's a modifier
+        setSelectedCards(prevSelected => prevSelected.filter(i => i !== index));
+      } else {
+        // Rule 3: Deselect all cards if the clicked card is not a modifier
+        setSelectedCards([]);
+      }
+    } else {
+      const currentSelectionIds = selectedCards.map(i => cardData[i].id);
+      let isSelectable = false;
+      if (playerId === activePlayer) {
+        if (selectedCards.length === 0) {
+          isSelectable = true;
+        } else {
+          const hasRecord = currentSelectionIds.some(id => /^record_\d$/.test(id));
+          const hasTour = currentSelectionIds.some(id => /^tour_\d$/.test(id));
+    
+          if (hasRecord) {
+            isSelectable = currentCardId.includes('record') || currentCardId.includes('record_modifier');
+          } else if (hasTour) {
+            isSelectable = currentCardId.includes('tour') || currentCardId.includes('tour_modifier');
+          }
+        }
+      }
+  
+      if (isSelectable) {
+        setSelectedCards(prevSelected => [...prevSelected, index]);
+      }
+    }
+  };
+
+  const handleCashButtonClick = () => {
+    handleGameAction('cash', playerId, cardData[selectedCards[0]].id, updateGameState);
+    // console.log(gameState)
+    // need useEffect here and elsewhere to ensure synchronous update of gameState
+  };
+
+  if (!allPlayersReady || !cardData.length) {
+    return <div>Loading cards or waiting for players...</div>; // Display a loading message or spinner
+  }
 
   return (
-   
-    <div className="cards-wrapper">
       <div className="cards-container">
        {cardData.map((card, index) => (
         <div 
         key={index}
-        className={`card ${selectedCard === index ? 'selected' : ''} ${card.hidden ? 'hidden' : ''}`}
+        className={`card ${selectedCards.includes(index) ? 'selected' : ''}`}
         onClick={() => handleCardClick(index)}
         >
-          <h3 className="card-title">{card.title}</h3>
-          <p className="card-content">{card.content}</p>
+          <h3 className="card-title">{card.text.display}</h3>
+          <p className="card-content">Cash-in value: {card.value}</p>
+          <p className="card-content">{card.text.hover}</p>
         </div>
       ))}
       
        
       
-      </div>
+     
       <div className="buttons-container">
-      <button className="play-button" onClick={() => openModal('play')}>Play</button>
-        <button className="cashin-button" onClick={() => openModal('cash in')}>Cash In</button>
+        <button className="play-button" onClick={() => openModal('play')}>Play</button>
+        <button className="cashin-button" onClick={() => openModal('cash in')} disabled={!isButtonEnabled}>Cash In</button>
         <button className="discard-button" onClick={() => openModal('discard')}>Discard</button>
 
       
