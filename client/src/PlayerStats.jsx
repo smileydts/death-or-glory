@@ -5,7 +5,7 @@ import './PlayerStats.css';
 
 const PlayerStats = () => {
   const [players, setPlayers] = useState([]);  
-  const { playerId, allPlayersReady, setAllPlayersReady } = usePlayer();
+  const { playerId, allPlayersReady, setAllPlayersReady, activePlayer } = usePlayer();
 
   useEffect(() => {
     if (playerId !== null && playerId !== undefined) {
@@ -44,7 +44,7 @@ const PlayerStats = () => {
   return (
     <div className="player-stats-grid">
       {players.map(player => (
-        <Player key={player.id} id={player.id} attrs={player} />
+        <Player key={player.id} id={player.id} attrs={player} isActive={player.id === activePlayer}/>
       ))}
     </div>
   );

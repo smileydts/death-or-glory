@@ -1,11 +1,15 @@
 import React, { useState, useEffect, useContext } from 'react';
 import './Cards.css';
 import { usePlayer } from './PlayerContext';
+import { useGameState } from './GameStateContext';
+import { handleGameAction } from './gameService';
 
 const Cards = () => {
-  const { playerId, allPlayersReady } = usePlayer();
+  const { playerId, allPlayersReady, activePlayer, setActivePlayer } = usePlayer();
+  const { gameState, updateGameState } = useGameState();
   const [cardData, setCardData] = useState([]);
   const [selectedCards, setSelectedCards] = useState([]);
+  const isButtonEnabled = selectedCards.length === 1;
 
   useEffect(() => {
     if(allPlayersReady) {
@@ -13,10 +17,11 @@ const Cards = () => {
         try {
           const response = await fetch(`${import.meta.env.VITE_API_URL}/api/game_state?player_id=${playerId}`);
           const data = await response.json();
+          updateGameState(data);
           const player = data.players.find(p => p.id === playerId);
           const playerCards = player ? player.cards : [];
           setCardData(playerCards);
-          console.log(data)
+          setActivePlayer(data.turn)
         } catch (error) {
           console.error('Error fetching card data:', error);
         }
@@ -44,16 +49,18 @@ const Cards = () => {
     } else {
       const currentSelectionIds = selectedCards.map(i => cardData[i].id);
       let isSelectable = false;
-      if (selectedCards.length === 0) {
-        isSelectable = true;
-      } else {
-        const hasRecord = currentSelectionIds.some(id => /^record_\d$/.test(id));
-        const hasTour = currentSelectionIds.some(id => /^tour_\d$/.test(id));
-  
-        if (hasRecord) {
-          isSelectable = currentCardId.includes('record') || currentCardId.includes('record_modifier');
-        } else if (hasTour) {
-          isSelectable = currentCardId.includes('tour') || currentCardId.includes('tour_modifier');
+      if (playerId === activePlayer) {
+        if (selectedCards.length === 0) {
+          isSelectable = true;
+        } else {
+          const hasRecord = currentSelectionIds.some(id => /^record_\d$/.test(id));
+          const hasTour = currentSelectionIds.some(id => /^tour_\d$/.test(id));
+    
+          if (hasRecord) {
+            isSelectable = currentCardId.includes('record') || currentCardId.includes('record_modifier');
+          } else if (hasTour) {
+            isSelectable = currentCardId.includes('tour') || currentCardId.includes('tour_modifier');
+          }
         }
       }
   
@@ -61,6 +68,12 @@ const Cards = () => {
         setSelectedCards(prevSelected => [...prevSelected, index]);
       }
     }
+  };
+
+  const handleCashButtonClick = () => {
+    handleGameAction('cash', playerId, cardData[selectedCards[0]].id, updateGameState);
+    // console.log(gameState)
+    // need useEffect here and elsewhere to ensure synchronous update of gameState
   };
 
   if (!allPlayersReady || !cardData.length) {
@@ -76,12 +89,13 @@ const Cards = () => {
         onClick={() => handleCardClick(index)}
         >
           <h3 className="card-title">{card.text.display}</h3>
+          <p className="card-content">Cash-in value: {card.value}</p>
           <p className="card-content">{card.text.hover}</p>
         </div>
       ))}
         <div className="buttons-container">
           <button className="play-button" onClick={() => handleButtonClick('play')}>Play</button>
-          <button className="cashin-button" onClick={() => handleButtonClick('cash in')}>Cash In</button>
+          <button className="cashin-button" onClick={() => handleCashButtonClick()} disabled={!isButtonEnabled}>Cash In</button>
           <button className="discard-button" onClick={() => handleButtonClick('discard')}>Discard</button>
         </div>
       </div>
