@@ -1,57 +1,99 @@
+
+
+
+.cards-wrapper {
+  display: flex;
+  justify-content: flex-start; /* Keep cards and buttons side-by-side */
+  align-items: flex-start;
+  gap: 40px;
+  width: 100%; /* Full width for the container */
+  max-height: 100%; /* Ensure the wrapper doesn't exceed the parent container's height */
+  overflow: hidden; /* Prevent overflowing content */
+  box-sizing: border-box;
+}
+
 .cards-container {
-    display: flex;
-    justify-content: flex-start; /* Align items to the start */
-  gap: 20px; /* Adjust the space between cards */
-  flex-wrap: wrap; /* Allow cards to wrap to the next line */
-  }
-  
-  .card {
-    width: calc(17% - 20px); /* Adjust card width based on container and gap */
-    height: 27vh;
-    background: #fff;
-    border: 2px solid #555555;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
-  }
-  
-  .card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);
-    border-color: #070707;
-  }
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* 5 equal columns for cards */
+  gap: 20px; /* Space between cards */
+  max-width: 80%; /* Limit the card grid's width to 70% */
+  flex-grow: 1; /* Ensure the grid grows to fill available space */
+  max-height: 100%; /* Limit the height to fit within the wrapper */
+  overflow: auto; /* Add scrolling if there are too many cards */
+}
 
-  .card.selected {
-    border: 3px solid blue;
-  }
-  
-  .card-title {
-    margin-top: 0;
-    color: #333;
-  }
-  
-  .card-content {
-    color: #666;
-  }
+.card {
+  width: 100%; /* Each card takes the full width of the grid column */
+  height: 25vh;
+  background: #fff;
+  border: 2px solid #555555;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+}
 
-  .buttons-container {
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-  }
+.card.hidden {
+  visibility: hidden; /* Hides the card but keeps its space */
+}
 
-  .play-button {
-    background-color: #981818;
-    cursor: pointer;
-  }
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);
+  border-color: #070707;
+}
 
-  .cashin-button {
-    background-color: #208120;
-    cursor: pointer;
-  }
+.card.selected {
+  border: 3px solid blue;
+}
 
-  .discard-button {
-    background-color: #fefefe;
-    cursor: pointer;
-  }
+.card-title {
+  margin-top: 0;
+  color: #333;
+}
+
+.card-content {
+  color: #666;
+}
+
+.buttons-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 150px; /* Fixed width for buttons */
+  flex-shrink: 0; /* Prevent shrinking */
+  max-height: 100%; /* Ensure buttons stay within the height limits */
+  overflow: hidden; /* Prevent buttons from overflowing */
+}
+
+.play-button, .cashin-button, .discard-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  color: white;
+}
+
+.cashin-button:disabled {
+  background-color: #ccc;  /* Grey out the button */
+  color: #666;  /* Dim the text color */
+  cursor: not-allowed;  /* Change cursor to indicate non-interactivity */
+}
+
+.play-button {
+  background-color: #981818;
+}
+
+.cashin-button {
+  background-color: #208120;
+}
+
+.discard-button {
+  background-color: #999;
+  color: #fff;
+}
+
+.play-button:hover, .cashin-button:hover, .discard-button:hover {
+  opacity: 0.9;
+}

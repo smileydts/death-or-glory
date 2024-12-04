@@ -9,7 +9,7 @@ import './App.css';
 const App = () => {
   return (
     <PlayerProvider>
-      <GameStateProvider>  // Wrap Routes or specific components with GameStateProvider
+      <GameStateProvider>
         <Routes>
           <Route path="/" element={<WelcomePage />} />
           <Route path="/game" element={<GameWindow />} />
@@ -18,5 +18,6 @@ const App = () => {
     </PlayerProvider>
   );
 }
+// Wrap Routes or specific components with GameStateProvider
 
 export default App;
