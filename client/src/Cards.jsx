@@ -44,16 +44,11 @@ const Cards = () => {
   };
 
   const handleModalConfirm = () => {
+    handleGameAction('cash', playerId, cardData[selectedCards[0]].id, updateGameState);
+    // console.log(gameState)
+    // need useEffect here and elsewhere to ensure synchronous update of gameState
     setModalVisible(false); 
   }
-  // const handleModalConfirm = () => {
-  //   const updatedCards = cardData.map((card, index) =>
-  //     index === selectedCard ? { ...card, hidden: true } : card
-  //   );
-  //   setCardData(updatedCards);
-  //   setSelectedCard(null);
-  //   setModalVisible(false); // Close the modal
-  // };
 
   const handleModalCancel = () => {
     setModalVisible(false); // Close the modal without making any changes
@@ -98,12 +93,6 @@ const Cards = () => {
     }
   };
 
-  const handleCashButtonClick = () => {
-    handleGameAction('cash', playerId, cardData[selectedCards[0]].id, updateGameState);
-    // console.log(gameState)
-    // need useEffect here and elsewhere to ensure synchronous update of gameState
-  };
-
   if (!allPlayersReady || !cardData.length) {
     return <div>Loading cards or waiting for players...</div>; // Display a loading message or spinner
   }
@@ -127,7 +116,7 @@ const Cards = () => {
      
       <div className="buttons-container">
         <button className="play-button" onClick={() => openModal('play')}>Play</button>
-        <button className="cashin-button" onClick={() => openModal('cash in')} disabled={!isButtonEnabled}>Cash In</button>
+        <button className="cashin-button" onClick={() => openModal('cash')} disabled={!isButtonEnabled}>Cash In</button>
         <button className="discard-button" onClick={() => openModal('discard')}>Discard</button>
 
       
