@@ -9,19 +9,7 @@ def get_game_state():
     game_state = current_app.config.get('GAME_STATE')
     if game_state is None:
         return jsonify({"error": "Game not initialized"}), 404
-
-    # Serialize the information needed from the game state to JSON
-    state = {
-        "deck": len(game_state.deck),
-        "discard_pile": len(game_state.discard_pile),
-        "players": [player.to_dict() for player in game_state.players],
-        "turn": game_state.turn
-    }
-    for p in range(len(game_state.players)):
-        state["players"][p]["num_cards"] = len(state["players"][p]["cards"])
-        if state["players"][p]["id"] != player_id:
-              # don't tell cards except for the requester
-            state["players"][p]["cards"] = []
+    state = game_state.to_dict(player_id)
     return jsonify(state)
 
 @game.route('/api/reset_game', methods=['GET'])

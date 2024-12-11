@@ -45,9 +45,15 @@ class GameState:
         self.deal_cards()
         self.last_play_text = ""
 
-    def to_dict(self):
+    def get_player_stats(self):
+        # everything except cards
+        return [{key: value for key, value in player.to_dict().items() if key != 'cards'} for player in self.players]
+
+
+    def to_dict(self, player_id):
         return {
-            'players': self.players,
+            'players': self.get_player_stats(),
+            'cards': self.players[player_id].cards,
             'turn': self.turn,
             'last_play_text': self.last_play_text
         }
